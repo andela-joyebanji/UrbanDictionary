@@ -22,10 +22,8 @@ class SentenceWordsRankerTest extends PHPUnit_Framework_TestCase {
 
 	public function testSentenceWordsRankerReturnsCorrectWordsRank()
 	{
-		$sentence = "Prosper has finished the curriculum and he will submit it to Nadayar. tight Tight Tight !!!";
+		$sentence = "Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight !!!";
 		$sentenceWordsRanker = new SentenceWordsRanker($sentence);
 
 		$this->assertEquals(3, $sentenceWordsRanker->getWordRank("tight"));
 	}
-
-}
