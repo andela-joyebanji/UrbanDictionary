@@ -27,3 +27,4 @@ class SentenceWordsRankerTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(3, $sentenceWordsRanker->getWordRank("tight"));
 	}
+}
