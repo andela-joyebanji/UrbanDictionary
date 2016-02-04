@@ -19,8 +19,8 @@
     },
 	"autoload": {
 		"psr-4": {
-			"Pyjac\\UrbanDictionary\\" : "src/"
-			//"Pyjac\\UrbanDictionary\\Exception\\" : "src/exception"
+			"Pyjac\\UrbanDictionary\\" : "src",
+			"Pyjac\\UrbanDictionary\\Exception\\" : "src/exception"
 
 		}
 	}
