@@ -10,7 +10,7 @@
 Require via composer like so:
 
 ```
-    composer require florence/dictionary
+    
 ```
 
 ## Usage
