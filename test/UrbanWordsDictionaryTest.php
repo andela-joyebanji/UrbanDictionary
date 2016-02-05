@@ -1,115 +1,106 @@
 <?php
 
-use Pyjac\UrbanDictionary\UrbanWordsDictionary;
-use Pyjac\UrbanDictionary\UrbanWord;
 use Pyjac\UrbanDictionary\UrbanDictionaryDataBank;
-use Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException;
+use Pyjac\UrbanDictionary\UrbanWord;
+use Pyjac\UrbanDictionary\UrbanWordsDictionary;
 
-class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
+class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
+{
+    public function inputUrbanWordsArray()
+    {
+        return UrbanDictionaryDataBank::$data;
+    }
 
-	public function inputUrbanWordsArray(){
+    public function testUrbanWordsDictionaryIsEmptyWhenNewlyCreated()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $this->assertTrue($urbanWordsDictionary->isEmpty());
+    }
 
-		return UrbanDictionaryDataBank::$data;
-	}	
+    public function testUrbanWordsDictionaryIsNotEmptyWhenNewUrbanWordsAreAdded()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $this->assertFalse($urbanWordsDictionary->isEmpty());
+    }
 
-	public function testUrbanWordsDictionaryIsEmptyWhenNewlyCreated(){
+    /**
+     *@dataProvider inputUrbanWordsArray
+     */
+    public function testAddNewUrbanWordFromAnArray($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$this->assertTrue($urbanWordsDictionary->isEmpty());
-	}
+        $this->assertFalse($urbanWordsDictionary->isEmpty());
+        $this->assertEquals([$slang, $description, $sampleSentence], $urbanWordsDictionary->getWord($slang));
+    }
 
+    public function testUrbanWordDeletedFromUrbanWordsDictionary()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        foreach (UrbanDictionaryDataBank::$data as $key => $value) {
+            $urbanWordsDictionary->addWord($value['slang'], $value['description'], $value['sample‐sentence']);
+        }
+        $beforeDeleteCount = $urbanWordsDictionary->getCount();
+        $urbanWordsDictionary->deleteWord('Goobe');
+        $this->assertEquals($beforeDeleteCount - 1, $urbanWordsDictionary->getCount());
+    }
 
-	public function testUrbanWordsDictionaryIsNotEmptyWhenNewUrbanWordsAreAdded(){
-
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		$this->assertFalse($urbanWordsDictionary->isEmpty());
-	}
-
-	/**
-	*
-	*@dataProvider inputUrbanWordsArray
-	*/
-	public function testAddNewUrbanWordFromAnArray($slang, $description, $sampleSentence){
-		
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
-
-		$this->assertFalse($urbanWordsDictionary->isEmpty());
-		$this->assertEquals([$slang, $description, $sampleSentence], $urbanWordsDictionary->getWord($slang));
-	}
-
-	public function testUrbanWordDeletedFromUrbanWordsDictionary(){
-		
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		foreach (UrbanDictionaryDataBank::$data as $key => $value) {
-			$urbanWordsDictionary->addWord($value["slang"], $value["description"], $value["sample‐sentence"]);
-		}
-		$beforeDeleteCount = $urbanWordsDictionary->getCount();
-		$urbanWordsDictionary->deleteWord("Goobe");
-		$this->assertEquals($beforeDeleteCount - 1, $urbanWordsDictionary->getCount());
-	}
-
-	 /**
+    /**
      * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      */
-	public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionForNonExistantWord(){
+    public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionForNonExistantWord()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->getWord('Goobe');
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->getWord("Goobe");
-	}
+    /**
+     *  @dataProvider inputUrbanWordsArray
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaArgument($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
 
-	/**
-	*  @dataProvider inputUrbanWordsArray
-    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
-    */
-	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaArgument($slang, $description, $sampleSentence){
+        $urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
+        //Duplicate
+        $urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
+    /**
+     * @dataProvider inputUrbanWordsArray
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaUrbanWordObject($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
 
-		$urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
-		//Duplicate
-		$urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        //Duplicate
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+    }
 
-	}
+    public function testUrbanWordDictionaryUpdateWord()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
 
-	/**
-	* @dataProvider inputUrbanWordsArray
-    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
-    */
-	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaUrbanWordObject($slang, $description, $sampleSentence){
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo.");
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
+        $this->assertEquals(['Goobe', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Goobe'));
+    }
 
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		//Duplicate
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		
-	}
+    /**
+     * @dataProvider inputUrbanWordsArray
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenWordToUpdateDoesNotExist()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
 
-	
-	public function testUrbanWordDictionaryUpdateWord(){
-
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		$urbanWordsDictionary->updateWord("Goobe","Means Trouble","I don't want any Goobo while doing my Cheakpoints ooo.");
-		
-		$this->assertEquals(["Goobe","Means Trouble","I don't want any Goobo while doing my Cheakpoints ooo."],$urbanWordsDictionary->getWord("Goobe"));
-		
-	}
-	/**
-	* @dataProvider inputUrbanWordsArray
-    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
-    */
-	public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenWordToUpdateDoesNotExist(){
-
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		$urbanWordsDictionary->updateWord("Goob","Means Trouble","I don't want any Goobo while doing my Cheakpoints ooo.");
-	}
-
-
-	
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goob', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo.");
+    }
 }

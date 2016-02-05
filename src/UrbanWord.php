@@ -1,8 +1,8 @@
 <?php
+
 namespace Pyjac\UrbanDictionary;
 
-
-final class UrbanWord 
+final class UrbanWord
 {
     private $slang;
     private $description;
@@ -24,56 +24,60 @@ final class UrbanWord
 
     /**
      * Get the slang.
+     *
      * @return string
      */
     public function getSlang()
     {
-    	return $this->slang;
+        return $this->slang;
     }
 
     /**
      * Get the description of the UrbanWord.
+     *
      * @return string
      */
     public function getDescription()
     {
-    	return $this->description;
+        return $this->description;
     }
 
     /**
-     * Get the sample sentence of the UrbanWord
+     * Get the sample sentence of the UrbanWord.
+     *
      * @return string
      */
     public function getSampleSentence()
     {
-    	return $this->sampleSentence;
+        return $this->sampleSentence;
     }
 
     /**
      * Check if the current Urban Word is thesame with the compared object.
+     *
      * @param object $object
-     * @return boolean  true if the two UrbanWords are equal
+     *
+     * @return bool true if the two UrbanWords are equal
      */
     public function equals($object)
     {
-    	
         return get_class($object) == 'UrbanWord'
-           and strcmp($this->slang,$object->slang)
-           and strcmp($this->description,$object->description)
-           and strcmp($this->sampleSentence,$object->sampleSentence);
+           and strcmp($this->slang, $object->slang)
+           and strcmp($this->description, $object->description)
+           and strcmp($this->sampleSentence, $object->sampleSentence);
     }
 
     /**
-     * Returns an associative array of properties of Urban Word
-     * @return array  
+     * Returns an associative array of properties of Urban Word.
+     *
+     * @return array
      */
     public function toArray()
     {
-        $urbanWordsArray = get_object_vars ( $this );     
+        $urbanWordsArray = get_object_vars($this);
         $urbanWordsArray['sample‐sentence'] = $urbanWordsArray['sampleSentence'];
         unset($urbanWordsArray['sampleSentence']);
+
         return $urbanWordsArray;
     }
-
-
 }
