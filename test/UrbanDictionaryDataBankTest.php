@@ -2,7 +2,8 @@
 
 use Pyjac\UrbanDictionary\UrbanDictionaryDataBank;
 
-Class UrbanDictionaryDataBankTest extends PHPUnit_Framework_TestCase {
+Class UrbanDictionaryDataBankTest extends PHPUnit_Framework_TestCase 
+{
 
 	public function setUp()
 	{

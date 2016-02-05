@@ -1,4 +1,5 @@
 <?php
+
 namespace Pyjac\UrbanDictionary;
 
 
@@ -56,11 +57,10 @@ final class UrbanWord
      */
     public function equals($object)
     {
-    	
-        return get_class($object) == 'UrbanWord'
-           and strcmp($this->slang,$object->slang)
-           and strcmp($this->description,$object->description)
-           and strcmp($this->sampleSentence,$object->sampleSentence);
+        return strcmp(get_class($object), 'Pyjac\UrbanDictionary\UrbanWord') == 0
+           and strcmp($this->slang, $object->slang) == 0
+           and strcmp($this->description, $object->description) == 0
+           and strcmp($this->sampleSentence, $object->sampleSentence) == 0;
     }
 
     /**
@@ -69,11 +69,9 @@ final class UrbanWord
      */
     public function toArray()
     {
-        $urbanWordsArray = get_object_vars ( $this );     
+        $urbanWordsArray = get_object_vars ($this);     
         $urbanWordsArray['sample‐sentence'] = $urbanWordsArray['sampleSentence'];
         unset($urbanWordsArray['sampleSentence']);
         return $urbanWordsArray;
     }
-
-
 }

@@ -1,8 +1,9 @@
 <?php
+
 namespace Pyjac\UrbanDictionary;
 
-class UrbanDictionaryDataBank {
-	
+class UrbanDictionaryDataBank 
+{
     /**
      * An array of Urban Words.
      *
@@ -24,6 +25,5 @@ class UrbanDictionaryDataBank {
 			"description" => "Used to inform someone to let go of an issue", 
 			"sample‐sentence" => "I know what Kenny did to you is bad but I want you to Gboju on the matter." 
 		],
-
 	]; 
 }

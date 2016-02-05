@@ -5,21 +5,25 @@ use Pyjac\UrbanDictionary\UrbanWord;
 use Pyjac\UrbanDictionary\UrbanDictionaryDataBank;
 use Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException;
 
-class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
+class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase 
+{
 
-	public function inputUrbanWordsArray(){
+	public function inputUrbanWordsArray()
+	{
 
 		return UrbanDictionaryDataBank::$data;
 	}	
 
-	public function testUrbanWordsDictionaryIsEmptyWhenNewlyCreated(){
+	public function testUrbanWordsDictionaryIsEmptyWhenNewlyCreated()
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 		$this->assertTrue($urbanWordsDictionary->isEmpty());
 	}
 
 
-	public function testUrbanWordsDictionaryIsNotEmptyWhenNewUrbanWordsAreAdded(){
+	public function testUrbanWordsDictionaryIsNotEmptyWhenNewUrbanWordsAreAdded()
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
@@ -28,9 +32,10 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	*
-	*@dataProvider inputUrbanWordsArray
+	* @dataProvider inputUrbanWordsArray
 	*/
-	public function testAddNewUrbanWordFromAnArray($slang, $description, $sampleSentence){
+	public function testAddNewUrbanWordFromArgument($slang, $description, $sampleSentence)
+	{
 		
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 		$urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
@@ -39,7 +44,23 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals([$slang, $description, $sampleSentence], $urbanWordsDictionary->getWord($slang));
 	}
 
-	public function testUrbanWordDeletedFromUrbanWordsDictionary(){
+	/**
+	*
+	* @dataProvider inputUrbanWordsArray
+	*/
+	public function testAddNewUrbanWordFromAnArray($slang, $description, $sampleSentence)
+	{
+		
+		$testArray = [$slang, $description, $sampleSentence];
+		$urbanWordsDictionary = new UrbanWordsDictionary();
+		$urbanWordsDictionary->addWord($testArray);
+
+		$this->assertFalse($urbanWordsDictionary->isEmpty());
+		$this->assertEquals($testArray, $urbanWordsDictionary->getWord($slang));
+	}
+
+	public function testUrbanWordDeletedFromUrbanWordsDictionary()
+	{
 		
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 		foreach (UrbanDictionaryDataBank::$data as $key => $value) {
@@ -53,17 +74,79 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
 	 /**
      * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      */
-	public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionForNonExistantWord(){
+	public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionForNonExistantWord()
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 		$urbanWordsDictionary->getWord("Goobe");
 	}
 
 	/**
-	*  @dataProvider inputUrbanWordsArray
+	 * @dataProvider inputUrbanWordsArray 
+     * @expectedException InvalidArgumentException
+     */
+	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenOnlyOneStringIsPassed($slang, $description, $sampleSentence)
+	{
+
+		$urbanWordsDictionary = new UrbanWordsDictionary();
+		$urbanWordsDictionary->addWord($slang);
+
+	}
+
+	/**
+	 * @dataProvider inputUrbanWordsArray 
+     * @expectedException InvalidArgumentException
+     */
+	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenOnlyTwoStringsArePassed($slang, $description, $sampleSentence)
+	{
+
+		$urbanWordsDictionary = new UrbanWordsDictionary();
+		$urbanWordsDictionary->addWord($slang,$description);
+
+	}
+
+	/**
+	 * @dataProvider inputUrbanWordsArray 
+     * @expectedException InvalidArgumentException
+     */
+	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfOneElementIsPassed($slang, $description, $sampleSentence)
+	{
+
+		$urbanWordsDictionary = new UrbanWordsDictionary();
+		$urbanWordsDictionary->addWord([$slang]);
+
+	}
+
+	/**
+	 * @dataProvider inputUrbanWordsArray 
+     * @expectedException InvalidArgumentException
+     */
+	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfTwoElementIsPassed($slang, $description, $sampleSentence)
+	{
+
+		$urbanWordsDictionary = new UrbanWordsDictionary();
+		$urbanWordsDictionary->addWord([$slang,$description]);
+
+	}
+
+	/**
+	 * @dataProvider inputUrbanWordsArray 
+     * @expectedException InvalidArgumentException
+     */
+	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfMoreThanThreeElementIsIsPassed($slang, $description, $sampleSentence)
+	{
+
+		$urbanWordsDictionary = new UrbanWordsDictionary();
+		$urbanWordsDictionary->addWord([$slang,$description]);
+
+	}
+
+	/**
+	* @dataProvider inputUrbanWordsArray
     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
     */
-	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaArgument($slang, $description, $sampleSentence){
+	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaArgument($slang, $description, $sampleSentence)
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 
@@ -77,7 +160,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
 	* @dataProvider inputUrbanWordsArray
     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
     */
-	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaUrbanWordObject($slang, $description, $sampleSentence){
+	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaUrbanWordObject($slang, $description, $sampleSentence)
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 
@@ -88,7 +172,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	
-	public function testUrbanWordDictionaryUpdateWord(){
+	public function testUrbanWordDictionaryUpdateWord()
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 
@@ -102,7 +187,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase {
 	* @dataProvider inputUrbanWordsArray
     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
     */
-	public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenWordToUpdateDoesNotExist(){
+	public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenWordToUpdateDoesNotExist()
+	{
 
 		$urbanWordsDictionary = new UrbanWordsDictionary();
 

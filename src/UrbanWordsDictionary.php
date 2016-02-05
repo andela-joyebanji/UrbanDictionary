@@ -1,16 +1,17 @@
 <?php 
+
 namespace Pyjac\UrbanDictionary;
 
 use Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException;
 use Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException;
-use InvalidArgumentException;
 
-class UrbanWordsDictionary {
-	
+class UrbanWordsDictionary 
+{
 	private $count;
 	private $urbanWords;
 
-	public function __construct($urbanWords = []){
+	public function __construct($urbanWords = [])
+	{
 		$this->urbanWords = $urbanWords;
 		$this->count = count($urbanWords);
 	}
@@ -24,10 +25,9 @@ class UrbanWordsDictionary {
 	 * @return true
 	 */
 
-	private function _addWord($word, $wordInfomation){
-
+	private function add($word, $wordInfomation)
+	{
 		$this->urbanWords[$word] = $wordInfomation;
-
 		$this->count++;
 		return true;
 	}
@@ -38,8 +38,8 @@ class UrbanWordsDictionary {
 	 *
 	 * @return true|false
 	 */
-	public function urbanWordExist($word){
-
+	public function urbanWordExist($word)
+	{
 		return array_key_exists($word, $this->urbanWords);
 	}
 
@@ -54,31 +54,29 @@ class UrbanWordsDictionary {
 	 * @throws InvalidArgumentException
 	 * @return true|false
 	 */
-	public function addWord($word, $description = "", $someSentence = ""){
-
+	public function addWord($word, $description = "", $someSentence = "")
+	{
 		$wordInfomation = [];
 		$urbanWord = "";
 		//Check if an associative array is passed to the function
-		if(is_array($word)){
-			$urbanWord = $word["slang"];
+		if (is_array($word) && !empty($word) && count($word) == 3){
+			$urbanWord = $word[0];
 			$wordInfomation = $word;
-
-		} else if($word instanceof UrbanWord){
+		} elseif ($word instanceof UrbanWord){
 			$urbanWord = $word->getSlang();
 			$wordInfomation = $word->toArray();
-			
-		} else if(!empty($word) && !empty($description)  && !empty($someSentence)){
+		} elseif (!empty($word) && !empty($description)  && !empty($someSentence)){
 			$urbanWord = $word;
 			$wordInfomation = [$word, $description, $someSentence];
-		}else{
-
-			throw new InvalidArgumentException;
+		} else {
+			throw new \InvalidArgumentException;
 		}
-		if($this->urbanWordExist($urbanWord)){
 
+		if($this->urbanWordExist($urbanWord)){
 			throw new UrbanWordAlreadyExistException;
 		}
-		return $this->_addWord($urbanWord, $wordInfomation);
+
+		return $this->add($urbanWord, $wordInfomation);
 	}
 
 	/**
@@ -92,14 +90,13 @@ class UrbanWordsDictionary {
 	 * @throws InvalidArgumentException
 	 * @return array
 	 */
-	public function updateWord($word, $description, $someSentence){
-
-		if(!$this->urbanWordExist($word)){
+	public function updateWord($word, $description, $someSentence)
+	{
+		if (!$this->urbanWordExist($word)){
 			throw new UrbanWordDoesNotExistException;
 		}
 
 		$this->urbanWords[$word] = [$word,$description,$someSentence];
-
 		return $this->urbanWords[$word];
 	}
 
@@ -111,13 +108,11 @@ class UrbanWordsDictionary {
 	 * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
 	 * @return array
 	 */
-	public function getWord($word){
-
+	public function getWord($word)
+	{
 		if (!$this->urbanWordExist($word)){
-
 			throw new UrbanWordDoesNotExistException;
 		}
-
 		return $this->urbanWords[$word];
 	}
 
@@ -131,13 +126,11 @@ class UrbanWordsDictionary {
 	public function deleteWord($word)
 	{
 		if (!$this->urbanWordExist($word)){
-
 			throw new UrbanWordDoesNotExistException;
 		}
+
 		unset($this->urbanWords[$word]);
-
 		return --$this->count;
-
 	}
 
 	/**
@@ -147,8 +140,8 @@ class UrbanWordsDictionary {
 	 * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
 	 * @return int Returns the current number of Words in the Dictionary
 	 */
-	public function getCount(){
-
+	public function getCount()
+	{
 		return $this->count;
 	}
 
@@ -156,9 +149,8 @@ class UrbanWordsDictionary {
 	 * Checks if Urban Words Dictionary is empty.
 	 * @return true|false
 	 */
-	public function isEmpty(){
-
+	public function isEmpty()
+	{
 		return $this->count == 0;
 	}
-
 }

@@ -2,7 +2,8 @@
 
 use Pyjac\UrbanDictionary\UrbanWord;
 
-class UrbanWordTest extends PHPUnit_Framework_TestCase {
+class UrbanWordTest extends PHPUnit_Framework_TestCase 
+{
 
 	
 	public function inputUrbanWords()
@@ -17,13 +18,12 @@ class UrbanWordTest extends PHPUnit_Framework_TestCase {
 	public function testUrbanWordIsCreatedProperly()
 	{
 		$urbanword = new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo.");
-
 		$this->assertEquals("Goobe", $urbanword->getSlang());
 	}
 
 	/**
 	*
-	*@dataProvider inputUrbanWords
+	* @dataProvider inputUrbanWords
 	*/
 	public function testUrbanWordCreation($slang, $description, $sampleSentence)
 	{
@@ -35,7 +35,7 @@ class UrbanWordTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	*
-	*@dataProvider inputUrbanWords
+	* @dataProvider inputUrbanWords
 	*/
 	public function testUrbanWordConvertsToAnAssociativeArray($slang, $description, $sampleSentence)
 	{
@@ -45,13 +45,13 @@ class UrbanWordTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	*
-	*@dataProvider inputUrbanWords
+	* @dataProvider inputUrbanWords
 	*/
 	public function testTwoUrbanWordsAreEqual($slang, $description, $sampleSentence)
 	{	
 		$urbanword1 = new UrbanWord($slang,$description,$sampleSentence);
 		$urbanword2 = new UrbanWord($slang,$description,$sampleSentence);
-		$this->assertTrue($urbanword1 == $urbanword2);
+		$this->assertTrue($urbanword1->equals($urbanword2));
 	}
 }
 
