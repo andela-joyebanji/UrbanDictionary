@@ -69,80 +69,68 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
     }
 
-	/**
-	 * @dataProvider inputUrbanWordsArray 
+    /**
+     * @dataProvider inputUrbanWordsArray 
      * @expectedException InvalidArgumentException
      */
-	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenOnlyOneStringIsPassed($slang, $description, $sampleSentence)
-	{
+    public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenOnlyOneStringIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord($slang);
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord($slang);
-
-	}
-
-	/**
-	 * @dataProvider inputUrbanWordsArray 
+    /**
+     * @dataProvider inputUrbanWordsArray 
      * @expectedException InvalidArgumentException
      */
-	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenOnlyTwoStringsArePassed($slang, $description, $sampleSentence)
-	{
+    public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenOnlyTwoStringsArePassed($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord($slang, $description);
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord($slang,$description);
-
-	}
-
-	/**
-	 * @dataProvider inputUrbanWordsArray 
+    /**
+     * @dataProvider inputUrbanWordsArray 
      * @expectedException InvalidArgumentException
      */
-	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfOneElementIsPassed($slang, $description, $sampleSentence)
-	{
+    public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfOneElementIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord([$slang]);
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord([$slang]);
-
-	}
-
-	/**
-	 * @dataProvider inputUrbanWordsArray 
+    /**
+     * @dataProvider inputUrbanWordsArray 
      * @expectedException InvalidArgumentException
      */
-	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfTwoElementIsPassed($slang, $description, $sampleSentence)
-	{
+    public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfTwoElementIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord([$slang, $description]);
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord([$slang,$description]);
-
-	}
-
-	/**
-	 * @dataProvider inputUrbanWordsArray 
+    /**
+     * @dataProvider inputUrbanWordsArray 
      * @expectedException InvalidArgumentException
      */
-	public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfMoreThanThreeElementIsIsPassed($slang, $description, $sampleSentence)
-	{
+    public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfMoreThanThreeElementIsIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord([$slang, $description]);
+    }
 
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-		$urbanWordsDictionary->addWord([$slang,$description]);
+    /**
+     * @dataProvider inputUrbanWordsArray
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaUrbanWordObject($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
 
-	}
-
-	/**
-	* @dataProvider inputUrbanWordsArray
-    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
-    */
-	public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhileAddingAlreadyExistingWordViaUrbanWordObject($slang, $description, $sampleSentence)
-	{
-
-		$urbanWordsDictionary = new UrbanWordsDictionary();
-
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		//Duplicate
-		$urbanWordsDictionary->addWord(new UrbanWord("Goobe","Used as a substitute for Trouble","I don't want any Goobo while doing my Cheakpoints ooo."));
-		
-	}
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        //Duplicate
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+    }
 
     public function testUrbanWordDictionaryUpdateWord()
     {
