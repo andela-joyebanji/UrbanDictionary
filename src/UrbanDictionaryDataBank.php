@@ -2,7 +2,7 @@
 
 namespace Pyjac\UrbanDictionary;
 
-class UrbanDictionaryDataBank 
+class UrbanDictionaryDataBank
 {
     /**
      * An array of Urban Words.
@@ -28,4 +28,3 @@ class UrbanDictionaryDataBank
 
     ];
 }
-
