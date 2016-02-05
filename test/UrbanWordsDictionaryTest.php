@@ -27,14 +27,25 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     /**
      *@dataProvider inputUrbanWordsArray
      */
-    public function testAddNewUrbanWordFromAnArray($slang, $description, $sampleSentence)
+    public function testAddNewUrbanWordWithArgumentsAsString($slang, $description, $sampleSentence)
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
         $urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
-
         $this->assertFalse($urbanWordsDictionary->isEmpty());
         $this->assertEquals([$slang, $description, $sampleSentence], $urbanWordsDictionary->getWord($slang));
     }
+
+    /**
+     *@dataProvider inputUrbanWordsArray
+     */
+    public function testAddNewUrbanWordFromArray($slang, $description, $sampleSentence)
+    {
+        $urbanWordArray = [$slang, $description, $sampleSentence];
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord($urbanWordArray);
+        $this->assertEquals($urbanWordArray, $urbanWordsDictionary->getWord($slang));
+    }
+
 
     public function testUrbanWordDeletedFromUrbanWordsDictionary()
     {
@@ -45,6 +56,18 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $beforeDeleteCount = $urbanWordsDictionary->getCount();
         $urbanWordsDictionary->deleteWord('Goobe');
         $this->assertEquals($beforeDeleteCount - 1, $urbanWordsDictionary->getCount());
+    }
+            
+     /**
+     * 
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+     */
+    public function testUrbanWordThrowsUrbanWordDoesNotExistExceptionWhenDeletingWordNotInUrbanWordsDictionary()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->deleteWord('Globe');
     }
 
     /**
@@ -127,9 +150,9 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addWord(new UrbanWord($slang, $description, $sampleSentence));
         //Duplicate
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addWord(new UrbanWord($slang, $description, $sampleSentence));
     }
 
     public function testUrbanWordDictionaryUpdateWord()

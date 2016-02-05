@@ -73,7 +73,7 @@ class WordsRankManager
      */
     public function setMode($caseSensitivityMode)
     {
-        if (!($this->mode == $caseSensitivityMode)) {
+        if (!($this->getMode() == $caseSensitivityMode)) {
             $this->mode = $caseSensitivityMode;
             $this->computeWordsRank();
         }
@@ -92,7 +92,7 @@ class WordsRankManager
     public function getWordRank($word)
     {
         if (!$this->wordExist($word)) {
-            throw new WordDoesNotExistException();
+            throw new WordDoesNotExistException;
         }
 
         return $this->wordsRank[$word];
