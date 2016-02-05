@@ -74,7 +74,7 @@ final class UrbanWord
      */
     public function toArray()
     {
-        $urbanWordsArray = get_object_vars ($this);     
+        $urbanWordsArray = get_object_vars($this);
         $urbanWordsArray['sample‐sentence'] = $urbanWordsArray['sampleSentence'];
         unset($urbanWordsArray['sampleSentence']);
 
