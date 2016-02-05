@@ -25,4 +25,13 @@ class WordsRankManagerTest extends PHPUnit_Framework_TestCase
 		$wordsRankManager = new WordsRankManager($sentence);
 		$this->assertEquals(3, $wordsRankManager->getWordRank("Tight"));
 	}
+
+	public function testWordsRankManagerReturnsCorrectWordsRankForCaseInsensitiveRank()
+	{
+		$sentence = "Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight !!!";
+		$wordsRankManager = new WordsRankManager($sentence, CASE_INSENSITIVE);
+		$this->assertEquals(3, $wordsRankManager->getWordRank("tight"));
+	}
+
+	
 }
