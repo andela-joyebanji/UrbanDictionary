@@ -46,15 +46,32 @@ class WordsRankManager
         $this->computeWordsRank();
     }
 
+    /**
+     * Compute rank of words in the instance sentence.
+     *
+     * @param void
+     */
     private function computeWordsRank()
     {
         if ($this->getMode() == CASE_SENSITIVE) {
-            $this->wordsRank = array_count_values(explode(' ', $this->sentence));
+            $this->wordsRank = 
+                            array_count_values(
+                                preg_replace("/[^A-Za-z0-9 ]/", '', explode(' ', $this->sentence))
+                            );
         } else {
             //Reference: http://us3.php.net/manual/en/function.array-count-values.php#81799
-            $this->wordsRank = array_count_values(array_map('strtolower', explode(' ', $this->sentence)));
+            $this->wordsRank = 
+                            array_count_values(
+                                preg_replace(
+                                    "/[^A-Za-z0-9 ]/", 
+                                    '', 
+                                    array_map('strtolower', explode(' ', $this->sentence))
+                                    )
+                            );
         }
     }
+
+
 
     /**
      * Get the set sentence.
@@ -89,6 +106,13 @@ class WordsRankManager
         return $this->mode;
     }
 
+    /**
+     * Get Word Rank.
+     *
+     * @throws Pyjac\UrbanDictionary\Exception\WordDoesNotExistException
+     * 
+     * @return void
+     */
     public function getWordRank($word)
     {
         if (!$this->wordExist($word)) {
@@ -98,7 +122,22 @@ class WordsRankManager
         return $this->wordsRank[$word];
     }
 
-    public function wordExist($word)
+    /**
+     * Get Words Rank.
+     * 
+     * @return array
+     */
+    public function getWordsRank()
+    {
+        return $this->wordsRank;
+    }
+
+    /**
+     * Check If a Word Exist.
+     * 
+     * @return booleen
+     */
+    private function wordExist($word)
     {
         if ($this->getMode() == CASE_SENSITIVE) {
             return isset($this->wordsRank[$word]);

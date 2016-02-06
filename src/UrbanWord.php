@@ -4,8 +4,25 @@ namespace Pyjac\UrbanDictionary;
 
 final class UrbanWord
 {
+    /**
+     * The slang.
+     *
+     * @var string
+     */
     private $slang;
+
+    /**
+     * The description of slang.
+     *
+     * @var string
+     */
     private $description;
+
+    /**
+     * A sample sentence.
+     *
+     * @var string
+     */
     private $sampleSentence;
 
     /**

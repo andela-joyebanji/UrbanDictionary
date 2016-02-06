@@ -8,7 +8,18 @@ use Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException;
 
 class UrbanWordsDictionary
 {
+    /**
+     * The number of words in the Dictionary.
+     *
+     * @var int
+     */
     private $count;
+
+    /**
+     *  The words in the Dictionary.
+     *
+     * @var int
+     */
     private $urbanWords;
 
     public function __construct($urbanWords = [])
