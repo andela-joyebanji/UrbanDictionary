@@ -18,7 +18,7 @@ class UrbanWordsDictionary
     /**
      *  The words in the Dictionary.
      *
-     * @var int
+     * @var array
      */
     private $urbanWords;
 
