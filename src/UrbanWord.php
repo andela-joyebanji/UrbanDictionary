@@ -36,14 +36,13 @@ final class UrbanWord
      */
     public function __construct($slang, $description, $sampleSentence)
     {
-        if(is_string($slang) && is_string($description) && is_string($sampleSentence)){
+        if (is_string($slang) && is_string($description) && is_string($sampleSentence)) {
             $this->slang = $slang;
             $this->description = $description;
             $this->sampleSentence = $sampleSentence;
-        }else {
-            throw new \InvalidArgumentException;
+        } else {
+            throw new \InvalidArgumentException();
         }
-        
     }
 
     /**
@@ -129,7 +128,7 @@ final class UrbanWord
     public function toArray()
     {
         $urbanWordsArray = get_object_vars($this);
-        $urbanWordsArray['sample‐sentence'] = $urbanWordsArray["sampleSentence"];
+        $urbanWordsArray['sample‐sentence'] = $urbanWordsArray['sampleSentence'];
         unset($urbanWordsArray['sampleSentence']);
 
         return $urbanWordsArray;

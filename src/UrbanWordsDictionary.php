@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Pyjac\UrbanDictionary;
 
 use Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException;
@@ -27,7 +26,7 @@ class UrbanWordsDictionary
      *
      * @var array
      */
-    private $urbanWordKeys = ["slang", "description", "sample‐sentence"];
+    private $urbanWordKeys = ['slang', 'description', 'sample‐sentence'];
 
     public function __construct($urbanWords = [])
     {
@@ -79,10 +78,11 @@ class UrbanWordsDictionary
     public function validateUrbanWordArrayKeys($array)
     {
         foreach ($this->urbanWordKeys as $key) {
-            if(!array_key_exists($key, $array)){
+            if (!array_key_exists($key, $array)) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -103,10 +103,10 @@ class UrbanWordsDictionary
     {
         //Check if an associative array is passed to the function
         if (is_array($word) && !empty($word) && count($word) == 3) {
-            if(!$this->validateUrbanWordArrayKeys($word)){
+            if (!$this->validateUrbanWordArrayKeys($word)) {
                 throw new \InvalidArgumentException();
             }
-            $this->add($word["slang"], $word);
+            $this->add($word['slang'], $word);
         } elseif ($word instanceof UrbanWord) {
             $this->add($word->getSlang(), $word->toArray());
         } elseif ($this->validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)) {
@@ -129,11 +129,9 @@ class UrbanWordsDictionary
      */
     private function validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)
     {
-        return (is_string($word) && is_string($description) && is_string($someSentence) &&
-                    !empty($word) && !empty($description)  && !empty($someSentence));
+        return is_string($word) && is_string($description) && is_string($someSentence) &&
+                    !empty($word) && !empty($description)  && !empty($someSentence);
     }
-    
-    
 
     /**
      * Update the slang of the UrbanWord in the Dictionary.
@@ -143,7 +141,8 @@ class UrbanWordsDictionary
      *
      * @throws InvalidArgumentException
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
-     * @return string 
+     *
+     * @return string
      */
     private function updateWordSlang($word, $wordUpdate)
     {
@@ -152,31 +151,32 @@ class UrbanWordsDictionary
             //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
             $word = $wordUpdate;
         } else {
-            throw new \InvalidArgumentException("Can't Update word with an empty String");   
+            throw new \InvalidArgumentException("Can't Update word with an empty String");
         }
+
         return $word;
     }
 
     /**
      * Update the UrbanWord with an UrbanWord Object.
      *
-     * @param string $word
+     * @param string                          $word
      * @param Pyjac\UrbanDictionary\UrbanWord $wordUpdateObject
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
      *
-     * @return string 
+     * @return string
      */
     private function updateWordObject($word, $wordUpdateObject)
     {
         if ($this->urbanWordExist($wordUpdateObject->getSlang())) {
             throw new UrbanWordAlreadyExistException();
         }
-        if(strcasecmp($word, $wordUpdateObject->getSlang()) !== 0){
+        if (strcasecmp($word, $wordUpdateObject->getSlang()) !== 0) {
             unset($this->urbanWords[$word]);
             $this->urbanWords[$wordUpdateObject->getSlang()] = $wordUpdateObject->toArray();
         }
-        $this->urbanWords[$wordUpdateObject->getSlang()] = $wordUpdateObject->toArray(); 
+        $this->urbanWords[$wordUpdateObject->getSlang()] = $wordUpdateObject->toArray();
 
         return  $wordUpdateObject->getSlang();
     }
@@ -205,11 +205,11 @@ class UrbanWordsDictionary
      * Update the UrbanWord with an Array.
      *
      * @param string $word
-     * @param array $wordUpdateArray
+     * @param array  $wordUpdateArray
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
      * 
-     * @return string 
+     * @return string
      */
     private function updateWordArray($word, $wordUpdateArray)
     {
@@ -222,8 +222,9 @@ class UrbanWordsDictionary
                 } else {
                     $this->urbanWords[$word][$key] = $value;
                 }
-            } 
+            }
         }
+
         return $word;
     }
 
@@ -244,14 +245,14 @@ class UrbanWordsDictionary
             throw new UrbanWordDoesNotExistException();
         }
         //If a string is passed you're updating the slang itself
-        if(is_string($wordUpdate)){
+        if (is_string($wordUpdate)) {
             $word = $this->updateWordSlang($word, $wordUpdate);
         } elseif ($wordUpdate instanceof UrbanWord) {
             $word = $this->updateWordObject($word, $wordUpdate);
         } elseif (is_array($wordUpdate)) {
-            $word = $this->updateWordArray($word, $wordUpdate);  
+            $word = $this->updateWordArray($word, $wordUpdate);
         } else {
-            throw new \InvalidArgumentException; 
+            throw new \InvalidArgumentException();
         }
 
         return $this->urbanWords[$word];
