@@ -163,6 +163,18 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         //Duplicate
         $urbanWordsDictionary->addUrbanWordObject(new UrbanWord($slang, $description, $sampleSentence));
     }
+            
+    /**
+     * 
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenUpdateWordDoesNotExistViaUrbanWordObject()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goob', new UrbanWord('Goobe2', 'Used as a substitute for Trouble2', "I don't want any Goobe while doing my Cheakpoints ooo2."));
+    }
 
     public function testUrbanWordDictionaryUpdateWordCorrectly()
     {
@@ -282,6 +294,17 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWordArray('Goobe', ['slang' => 'Goobe2', 'description' => 'Trouble', 'sample‐sentence' => "I don't"]);
+    }
+
+    /**
+     * 
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenUpdateWordDoesNotExistViaUrbanWordArray()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWordArray('Goobed', ['slang' => 'GoobeChanged', 'description' => 'Trouble', 'sample‐sentence' => "I don't"]);
     }
 
     /**

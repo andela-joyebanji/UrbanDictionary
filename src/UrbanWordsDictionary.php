@@ -254,9 +254,7 @@ class UrbanWordsDictionary
      */
     public function updateWordArray($word, $wordUpdateArray)
     {
-        if (!$this->urbanWordExist($word)) {
-            throw new UrbanWordDoesNotExistException();
-        }
+        if (!$this->urbanWordExist($word)) throw new UrbanWordDoesNotExistException();
         foreach ($wordUpdateArray as $key => $value) {
            if(in_array($key, $this->urbanWordKeys)){
                 if(strcasecmp("slang", $key) == 0){
