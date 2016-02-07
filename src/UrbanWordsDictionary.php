@@ -27,7 +27,7 @@ class UrbanWordsDictionary
      *
      * @var array
      */
-    private $urbanWordKeys = ["slang","description","sample-sentence"];
+    private $urbanWordKeys = ["slang", "description", "sample‐sentence"];
 
     public function __construct($urbanWords = [])
     {
@@ -202,7 +202,7 @@ class UrbanWordsDictionary
     private function updateWordArray($word, $wordUpdateArray)
     {
         foreach ($wordUpdateArray as $key => $value) {
-           if(array_key_exists($key, $this->urbanWords)){
+           if(in_array($key, $this->urbanWordKeys)){
                 if(strcasecmp("slang", $key) == 0){
                     //Replace Urban Word if the new object passed as a different slang
                     if(strcasecmp($word, $value) !== 0){
@@ -213,7 +213,8 @@ class UrbanWordsDictionary
                     }else {
                         $this->urbanWords[$word][$key] = $value;
                     }
-
+                } else {
+                    $this->urbanWords[$word][$key] = $value;
                 }
             } 
         }
