@@ -20,7 +20,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     public function testUrbanWordsDictionaryIsNotEmptyWhenNewUrbanWordsAreAdded()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $this->assertFalse($urbanWordsDictionary->isEmpty());
     }
 
@@ -43,7 +43,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     public function testAddNewUrbanWordThrowsInvalidArgumentExceptionWhenMalformedInputArrayIsPassed($slang, $description, $sampleSentence)
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord(['slan' => $slang, 'descripti' => $description, 'sample‐ence' => $sampleSentence]);
+        $urbanWordsDictionary->addUrbanWordArray(['slan' => $slang, 'descripti' => $description, 'sample‐ence' => $sampleSentence]);
     }
 
     /**
@@ -53,7 +53,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordArray = ['slang' => $slang, 'description' => $description, 'sample‐sentence' => $sampleSentence];
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord($urbanWordArray);
+        $urbanWordsDictionary->addUrbanWordArray($urbanWordArray);
         $this->assertEquals($urbanWordArray, $urbanWordsDictionary->getWord($slang));
     }
 
@@ -75,7 +75,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->deleteWord('Globe');
     }
 
@@ -148,7 +148,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     public function testUrbanWordDictionaryAddWordThrowsInvalidArgumentExceptionWhenArrayOfMoreThanThreeElementIsIsPassed($slang, $description, $sampleSentence)
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord([$slang, $description]);
+        $urbanWordsDictionary->addUrbanWordArray([$slang, $description]);
     }
 
     /**
@@ -159,16 +159,16 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord($slang, $description, $sampleSentence));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord($slang, $description, $sampleSentence));
         //Duplicate
-        $urbanWordsDictionary->addWord(new UrbanWord($slang, $description, $sampleSentence));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord($slang, $description, $sampleSentence));
     }
 
     public function testUrbanWordDictionaryUpdateWordCorrectly()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', 'Gab');
         $this->assertEquals(['slang' => 'Gab', 'description' => 'Used as a substitute for Trouble', 'sample‐sentence' => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Gab'));
     }
@@ -177,7 +177,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordObject = $urbanWordsDictionary->getWord('Goobe');
         $updateWordObject = new UrbanWord('Gab', 'substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo.");
         $urbanWordsDictionary->updateWord('Goobe', $updateWordObject);
@@ -191,8 +191,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
-        $urbanWordsDictionary->addWord(new UrbanWord('Goob', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goob', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordObject = $urbanWordsDictionary->getWord('Goobe');
         $updateWordObject = new UrbanWord('Goob', 'Trouble', "I don't want any Goobe while doing my Cheakpoints ooo.");
         $urbanWordsDictionary->updateWord('Goobe', $updateWordObject);
@@ -205,7 +205,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Gab', 'Goobe');
     }
 
@@ -216,7 +216,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', '');
     }
 
@@ -227,8 +227,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobe2 while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobe2 while doing my Cheakpoints ooo."));
 
         $urbanWordsDictionary->updateWord('Goobe', 'Goobe2');
     }
@@ -240,7 +240,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', 'Gab');
         $this->assertEquals(['slang' => 'Gab', 'description' => 'Used as a substitute for Trouble', 'sample‐sentence' => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Goobe'));
     }
@@ -253,14 +253,14 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goob', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo.");
     }
 
     public function testUrbanWordDictionaryUpdateWordCorrectlyWithAnArray()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', ['description' => 'Trouble', 'sample‐sentence' => "I don't"]);
         $this->assertEquals(['slang' => 'Goobe', 'description' => 'Trouble', 'sample‐sentence' => "I don't"], $urbanWordsDictionary->getWord('Goobe'));
     }
@@ -268,7 +268,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     public function testUrbanWordDictionaryUpdateWordCorrectlyWithAnArrayWhenSlangChanges()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', ['slang' => 'GoobeChanged', 'description' => 'Trouble', 'sample‐sentence' => "I don't"]);
         $this->assertEquals(['slang' => 'GoobeChanged', 'description' => 'Trouble', 'sample‐sentence' => "I don't"], $urbanWordsDictionary->getWord('GoobeChanged'));
     }
@@ -279,8 +279,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhenUpdatingFromArrayWhoSlangValueAlreadyExist()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', ['slang' => 'Goobe2', 'description' => 'Trouble', 'sample‐sentence' => "I don't"]);
     }
 
@@ -290,7 +290,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     public function testUrbanWordDictionaryThrowsInvalidArgumentExceptionWhenUpdateWordArgumentIsNotSupported()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', null);
     }
 }

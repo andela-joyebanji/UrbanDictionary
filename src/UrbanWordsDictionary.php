@@ -101,21 +101,43 @@ class UrbanWordsDictionary
      */
     public function addWord($word, $description = '', $someSentence = '')
     {
-        //Check if an associative array is passed to the function
-        if (is_array($word) && !empty($word) && count($word) == 3) {
-            if (!$this->validateUrbanWordArrayKeys($word)) {
-                throw new \InvalidArgumentException();
-            }
-            return $this->add($word['slang'], $word);
-        } 
-        if ($word instanceof UrbanWord) {
-            return $this->add($word->getSlang(), $word->toArray());
-        } 
         if ($this->validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)) {
             return $this->add($word, (new UrbanWord($word, $description, $someSentence))->toArray());
         } else {
             throw new \InvalidArgumentException();
         }
+    }
+
+    /**
+     * Adds a new word Using An Array.
+     *
+     * @param Pyjac\UrbanDictionary\UrbanWord $word
+     * 
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     *
+     * @return true
+     */
+    public function addUrbanWordObject(UrbanWord $word)
+    {
+        return $this->add($word->getSlang(), $word->toArray());
+    }
+
+    /**
+     * Adds a new word Using An Array.
+     *
+     * @param array $word
+     * 
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     * @throws InvalidArgumentException
+     *
+     * @return true
+     */
+    public function addUrbanWordArray(array $word)
+    {
+        if (!$this->validateUrbanWordArrayKeys($word)) {
+            throw new \InvalidArgumentException();
+        }
+        return $this->add($word['slang'], $word);
     }
 
     /**
