@@ -186,6 +186,22 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(["slang" => 'Gab', "description" => 'substitute for Trouble', "sample‐sentence" => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Gab'));
     }
 
+    
+
+    /**
+    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+    */
+    public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhenChangingWordToAnAlreadyExistingWord()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addWord(new UrbanWord('Goob', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordObject = $urbanWordsDictionary->getWord('Goobe');
+        $updateWordObject = new UrbanWord('Goob', "Trouble", "I don't want any Goobe while doing my Cheakpoints ooo.");
+        $urbanWordsDictionary->updateWord('Goobe', $updateWordObject);
+    }
+
     /**
     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
     */
