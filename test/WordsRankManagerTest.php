@@ -4,13 +4,14 @@ use Pyjac\UrbanDictionary\WordsRankManager;
 
 class WordsRankManagerTest extends PHPUnit_Framework_TestCase
 {
-	protected $sentence;
-	protected $wordsRankManager;
-	public function setUp()
-	{
-		$this->sentence = "Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight";
-		$this->wordsRankManager = new WordsRankManager($this->sentence);
-	}
+    protected $sentence;
+    protected $wordsRankManager;
+
+    public function setUp()
+    {
+        $this->sentence = 'Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight';
+        $this->wordsRankManager = new WordsRankManager($this->sentence);
+    }
 
     public function testWordsRankManagerCreation()
     {
@@ -40,7 +41,7 @@ class WordsRankManagerTest extends PHPUnit_Framework_TestCase
 
     public function testWordsRankManagerReturnsCorrectWordsRankWhenModeIsSwitched()
     {
-    	$sentence = 'Prosper has finished the curriculum and he will submit it to Nadayar. Tight tight Tight !!!';
+        $sentence = 'Prosper has finished the curriculum and he will submit it to Nadayar. Tight tight Tight !!!';
         $wordsRankManager = new WordsRankManager($sentence, CASE_SENSITIVE);
         $this->assertEquals(1, $wordsRankManager->getWordRank('tight'));
         $wordsRankManager->setMode(CASE_INSENSITIVE);
@@ -61,9 +62,8 @@ class WordsRankManagerTest extends PHPUnit_Framework_TestCase
         $wordsRankManager = new WordsRankManager($this->sentence);
         //die(var_dump($wordsRankManager->getWordsRank()));
         $this->assertTrue(
-            ["Prosper" => 1, "has" => 1,"finished" => 1, 
-             "the"     => 1, "curriculum" => 1, "and" => 1, "he"   => 1, "will" => 1, "submit"  => 1, 
-             "it"      => 1, "to"         => 1, "Nadayar" => 1, "Tight" => 3] == $wordsRankManager->getWordsRank());
+            ['Prosper' => 1, 'has' => 1, 'finished' => 1,
+             'the'     => 1, 'curriculum' => 1, 'and' => 1, 'he'   => 1, 'will' => 1, 'submit'  => 1,
+             'it'      => 1, 'to'         => 1, 'Nadayar' => 1, 'Tight' => 3, ] == $wordsRankManager->getWordsRank());
     }
-
 }
