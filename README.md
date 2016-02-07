@@ -3,20 +3,55 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/andela-joyebanji/UrbanDictionary/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/andela-joyebanji/UrbanDictionary/?branch=develop)
 
 
-# Checkpoint One - Urban dictionary agnostic of common slangs & meanings
+###  Urban Dictionary Agnostic PHP Package
 
+A php package for managing Urban Words and ranking of words in a sentence.
+This Package uses PSR-4 Autoload Standard.
 
-## Classes
+## Install
 
-## Installation
+Via Composer
 
-Require via composer like so:
-
-```
-    
+``` bash
+$ composer require Pyjac/UrbanDictionary
 ```
 
 ## Usage
+
+###UrbanWord
+
+A class used to store Detials of an Urban Word.
+```php
+    $urbanWord = new Pyjac\UrbanDictionary\UrbanWord("Twale","An exclamation that is used to show
+respect to another person", "Twale!!! The Chairman");
+
+	$urbanWord->getSlang(); // "Twale"
+	$urbanWord->getDescription(); // "An exclamation that is used to show
+respect to another person"
+	$urbanWord->getSampleSentence(); // "Twale!!! The Chairman"
+	
+
+	$urbanWord->setSlang(); // "Twale"
+
+```
+
+
+#####Create New Word
+```php
+    $urbanDictionary = new Pyjac\UrbanDictionary();
+
+    //To create new urban word, pass  
+    //slang, description and sentence-example respectively
+    //to create function the function
+
+    $urban->create
+    (
+      "Kpom-Kpi",
+      "Means to chill, cool-down, mellow",
+      "Bros, please can you Kpom-Kpi right there"
+    );
+
+```
 
 
 ## Security
