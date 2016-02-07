@@ -173,7 +173,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
         $urbanWordsDictionary->addUrbanWordObject(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
-        $urbanWordsDictionary->updateWord('Goob', new UrbanWord('Goobe2', 'Used as a substitute for Trouble2', "I don't want any Goobe while doing my Cheakpoints ooo2."));
+        $urbanWordsDictionary->updateWordObject('Goob', new UrbanWord('Goobe2', 'Used as a substitute for Trouble2', "I don't want any Goobe while doing my Cheakpoints ooo2."));
     }
 
     public function testUrbanWordDictionaryUpdateWordCorrectly()

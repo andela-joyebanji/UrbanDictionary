@@ -172,30 +172,6 @@ class UrbanWordsDictionary
     }
 
     /**
-     * Update the slang of the UrbanWord in the Dictionary.
-     *
-     * @param string $word
-     * @param string $wordUpdate
-     *
-     * @throws InvalidArgumentException
-     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
-     *
-     * @return string
-     */
-    public function updateWordSlang($word, $wordUpdate)
-    {
-        if(!empty($wordUpdate)) {
-            $this->replaceWordSlang($word, $wordUpdate);
-            //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
-            $word = $wordUpdate;
-        } else {
-            throw new \InvalidArgumentException("Can't Update word with an empty String");
-        }
-
-        return $word;
-    }
-
-    /**
      * Update the UrbanWord with an UrbanWord Object.
      *
      * @param string                          $word
@@ -279,21 +255,20 @@ class UrbanWordsDictionary
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      * @throws InvalidArgumentException
      *
-     * @return array
+     * @return string
      */
     public function updateWord($word, $wordUpdate)
     {
-        if (!$this->urbanWordExist($word)) {
-            throw new UrbanWordDoesNotExistException();
-        }
-        //If a string is passed you're updating the slang itself
-        if ($this->is_non_empty_string($wordUpdate)) {
-            $word = $this->updateWordSlang($word, $wordUpdate);
+        if($this->is_non_empty_string($wordUpdate) && $this->is_non_empty_string($word)) {
+            if (!$this->urbanWordExist($word)) throw new UrbanWordDoesNotExistException();
+            $this->replaceWordSlang($word, $wordUpdate);
+            //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
+            $word = $wordUpdate;
         } else {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("Can't Update word with an empty String");
         }
 
-        return $this->urbanWords[$word];
+        return $word;
     }
 
     /**
