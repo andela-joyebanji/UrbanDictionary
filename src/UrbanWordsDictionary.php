@@ -144,7 +144,7 @@ class UrbanWordsDictionary
      *
      * @return true|false
      */
-    function is_non_empty_string($val)
+    private function is_non_empty_string($val)
     {
         return is_string($val) && $val !== '';
     }
