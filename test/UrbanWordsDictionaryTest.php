@@ -40,7 +40,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
      */
     public function testAddNewUrbanWordFromArray($slang, $description, $sampleSentence)
     {
-        $urbanWordArray = [$slang, $description, $sampleSentence];
+        $urbanWordArray = ["slang" => $slang, "description" => $description, "sample-sentence" => $sampleSentence];
         $urbanWordsDictionary = new UrbanWordsDictionary();
         $urbanWordsDictionary->addWord($urbanWordArray);
         $this->assertEquals($urbanWordArray, $urbanWordsDictionary->getWord($slang));
