@@ -48,4 +48,17 @@ class UrbanWordTest extends PHPUnit_Framework_TestCase
         $urbanword = new UrbanWord($slang, $description, $sampleSentence);
         $this->assertEquals(['slang' => $slang, 'description' => $description, 'sample‐sentence' => $sampleSentence], $urbanword->toArray());
     }
+
+    /**
+     *@dataProvider inputUrbanWords
+     */
+    public function testUrbanWordConvertsSetPropertiesCorrectly($slang, $description, $sampleSentence)
+    {
+        $urbanword = new UrbanWord($slang, $description, $sampleSentence);
+        $this->assertEquals(['slang' => $slang, 'description' => $description, 'sample‐sentence' => $sampleSentence], $urbanword->toArray());
+        $urbanword->setSlang($slang."Set");
+        $urbanword->setDescription($description."Set");
+        $urbanword->setSampleSentence($sampleSentence."Set");
+        $this->assertEquals(['slang' => $slang."Set", 'description' => $description."Set", 'sample‐sentence' => $sampleSentence."Set"], $urbanword->toArray());
+    }
 }

@@ -83,7 +83,7 @@ class UrbanWordsDictionary
             $wordInfomation = $word->toArray();
         } elseif (!empty($word) && !empty($description)  && !empty($someSentence)) {
             $urbanWord = $word;
-            $wordInfomation = [$word, $description, $someSentence];
+            $wordInfomation = (new UrbanWord($word, $description, $someSentence))->toArray();
         } else {
             throw new \InvalidArgumentException();
         }
@@ -99,22 +99,62 @@ class UrbanWordsDictionary
      * Update an existing word, including it description and simple sentence, in the Urban Words
      * Dictionary.
      *
-     * @param string|array|UrbanWord $word
-     * @param string                 $description
-     * @param string                 $someSentence
+     * @param string|array|UrbanWord $wordUpdate
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      * @throws InvalidArgumentException
      *
      * @return array
      */
-    public function updateWord($word, $description, $someSentence)
+    public function updateWord($word, $wordUpdate)
     {
         if (!$this->urbanWordExist($word)) {
             throw new UrbanWordDoesNotExistException();
         }
+        //If a string is passed you're updating the slang itself
+        if(is_string($wordUpdate)){
+            if(!empty($wordUpdate)) {
+                if ($this->urbanWordExist($wordUpdate)) {
+                    throw new UrbanWordAlreadyExistException();
+                }
+                $this->urbanWords[$wordUpdate] = $this->urbanWords[$word];
+                $this->urbanWords[$wordUpdate]["slang"] = $wordUpdate;
+                unset($this->urbanWords[$word]);
+                //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
+                $word = $wordUpdate;
+            } else {
+                throw new \InvalidArgumentException("Can't Update word with an empty String");   
+            }
+        } elseif ($wordUpdate instanceof UrbanWord) {
+            if ($this->urbanWordExist($wordUpdate->getSlang())) {
+                throw new UrbanWordDoesNotExistException();
+            }
+            if(strcasecmp($word, $wordUpdate->getSlang()) !== 0){
+                unset($urbanWordsArray[$word]);
+                $this->urbanWords[$wordUpdate->getSlang()] = $wordUpdate->toArray();
+            }
+            $this->urbanWords[$wordUpdate->getSlang()] = $wordUpdate->toArray();
+        } elseif (is_array($wordUpdate)) {
+            foreach ($wordUpdate as $key => $value) {
+               if(array_key_exists($key, $this->urbanWords)){
+                    if(strcasecmp("slang", $key) == 0){
+                        //Replace Urban Word if the new object passed as a different slang
+                        if(strcasecmp($word, $value) !== 0){
+                            $this->urbanWords[$value] = $this->urbanWords[$wordUpdate];
+                            unset($this->urbanWords[$word]);
+                            //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
+                            $word = $value;
+                        }else {
+                            $this->urbanWords[$word][$key] = $value;
+                        }
 
-        $this->urbanWords[$word] = [$word, $description, $someSentence];
+                    }
+                } 
+            }
+        } else {
+            throw new \InvalidArgumentException;
+            
+        }
 
         return $this->urbanWords[$word];
     }

@@ -32,7 +32,7 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary = new UrbanWordsDictionary();
         $urbanWordsDictionary->addWord($slang, $description, $sampleSentence);
         $this->assertFalse($urbanWordsDictionary->isEmpty());
-        $this->assertEquals([$slang, $description, $sampleSentence], $urbanWordsDictionary->getWord($slang));
+        $this->assertEquals(["slang" => $slang, "description" => $description, "sample‐sentence" => $sampleSentence], $urbanWordsDictionary->getWord($slang));
     }
 
     /**
@@ -155,14 +155,47 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addWord(new UrbanWord($slang, $description, $sampleSentence));
     }
 
-    public function testUrbanWordDictionaryUpdateWord()
+    public function testUrbanWordDictionaryUpdateWordCorrectly()
     {
         $urbanWordsDictionary = new UrbanWordsDictionary();
 
-        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
-        $urbanWordsDictionary->updateWord('Goobe', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo.");
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', "Gab");
+        $this->assertEquals(["slang" => 'Gab', "description" => 'Used as a substitute for Trouble', "sample‐sentence" => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Gab'));
+    }
 
-        $this->assertEquals(['Goobe', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Goobe'));
+    /**
+    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+    */
+    public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenTryingToUpdateWordThatDoesNotExist()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Gab', "Goobe");
+    }
+
+    /**
+    * @expectedException InvalidArgumentException
+    */
+    public function testUrbanWordDictionaryThrowsInvalidArgumentExceptionWhenUpdateWordIsAnEmptyString()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', "");
+    }
+
+    /**
+    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+    */
+    public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenTryingToGetChangedWord()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', "Gab");
+        $this->assertEquals(["slang" => 'Gab', "description" => 'Used as a substitute for Trouble', "sample‐sentence" => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Goobe'));
     }
 
     /**

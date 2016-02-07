@@ -50,6 +50,16 @@ final class UrbanWord
     }
 
     /**
+     * Set the slang.
+     *
+     * @return void
+     */
+    public function setSlang($slang)
+    {
+        $this->slang = $slang;
+    }
+
+    /**
      * Get the description of the UrbanWord.
      *
      * @return string
@@ -60,6 +70,16 @@ final class UrbanWord
     }
 
     /**
+     * Set the description of the UrbanWord.
+     *
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
      * Get the sample sentence of the UrbanWord.
      *
      * @return string
@@ -67,6 +87,16 @@ final class UrbanWord
     public function getSampleSentence()
     {
         return $this->sampleSentence;
+    }
+
+    /**
+     * Set the sample sentence of the UrbanWord.
+     *
+     * @return void
+     */
+    public function setSampleSentence($sampleSentence)
+    {
+        $this->sampleSentence = $sampleSentence;
     }
 
     /**
