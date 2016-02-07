@@ -36,6 +36,17 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider inputUrbanWordsArray
+     *
+     * @expectedException  InvalidArgumentException
+     */
+    public function testAddNewUrbanWordThrowsInvalidArgumentExceptionWhenMalformedInputArrayIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord(["slan" => $slang, "descripti" => $description, "sample‐ence" => $sampleSentence]);
+    }
+
+    /**
      *@dataProvider inputUrbanWordsArray
      */
     public function testAddNewUrbanWordFromArray($slang, $description, $sampleSentence)
@@ -162,6 +173,17 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', "Gab");
         $this->assertEquals(["slang" => 'Gab', "description" => 'Used as a substitute for Trouble', "sample‐sentence" => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Gab'));
+    }
+
+    public function testUrbanWordDictionaryUpdateWordCorrectlyWithAnUrbanWordObject()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordObject = $urbanWordsDictionary->getWord('Goobe');
+        $updateWordObject = new UrbanWord('Gab', "substitute for Trouble", "I don't want any Goobe while doing my Cheakpoints ooo.");
+        $urbanWordsDictionary->updateWord('Goobe', $updateWordObject);
+        $this->assertEquals(["slang" => 'Gab', "description" => 'substitute for Trouble', "sample‐sentence" => "I don't want any Goobe while doing my Cheakpoints ooo."], $urbanWordsDictionary->getWord('Gab'));
     }
 
     /**

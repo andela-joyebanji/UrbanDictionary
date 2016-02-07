@@ -165,7 +165,7 @@ class UrbanWordsDictionary
             throw new UrbanWordDoesNotExistException();
         }
         if(strcasecmp($word, $wordUpdateObject->getSlang()) !== 0){
-            unset($urbanWordsArray[$word]);
+            unset($this->urbanWords[$word]);
             $this->urbanWords[$wordUpdateObject->getSlang()] = $wordUpdateObject->toArray();
         }
         $this->urbanWords[$wordUpdateObject->getSlang()] = $wordUpdateObject->toArray(); 
