@@ -182,7 +182,7 @@ class UrbanWordsDictionary
      *
      * @return string
      */
-    private function updateWordSlang($word, $wordUpdate)
+    public function updateWordSlang($word, $wordUpdate)
     {
         if(!empty($wordUpdate)) {
             $this->replaceWordSlang($word, $wordUpdate);
@@ -205,8 +205,11 @@ class UrbanWordsDictionary
      *
      * @return string
      */
-    private function updateWordObject($word, $wordUpdateObject)
+    public function updateWordObject($word, $wordUpdateObject)
     {
+        if (!$this->urbanWordExist($word)) {
+            throw new UrbanWordDoesNotExistException();
+        }
         if ($this->urbanWordExist($wordUpdateObject->getSlang())) {
             throw new UrbanWordAlreadyExistException();
         }
@@ -249,8 +252,11 @@ class UrbanWordsDictionary
      * 
      * @return string
      */
-    private function updateWordArray($word, $wordUpdateArray)
+    public function updateWordArray($word, $wordUpdateArray)
     {
+        if (!$this->urbanWordExist($word)) {
+            throw new UrbanWordDoesNotExistException();
+        }
         foreach ($wordUpdateArray as $key => $value) {
            if(in_array($key, $this->urbanWordKeys)){
                 if(strcasecmp("slang", $key) == 0){
@@ -283,12 +289,8 @@ class UrbanWordsDictionary
             throw new UrbanWordDoesNotExistException();
         }
         //If a string is passed you're updating the slang itself
-        if (is_string($wordUpdate)) {
+        if ($this->is_non_empty_string($wordUpdate)) {
             $word = $this->updateWordSlang($word, $wordUpdate);
-        } elseif ($wordUpdate instanceof UrbanWord) {
-            $word = $this->updateWordObject($word, $wordUpdate);
-        } elseif (is_array($wordUpdate)) {
-            $word = $this->updateWordArray($word, $wordUpdate);
         } else {
             throw new \InvalidArgumentException();
         }
