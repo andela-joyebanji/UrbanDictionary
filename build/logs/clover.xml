@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1454833178">
-  <project timestamp="1454833178">
+<coverage generated="1454833610">
+  <project timestamp="1454833610">
     <package name="Pyjac\UrbanDictionary">
       <file name="/Users/bendozy/Desktop/UrbanDictionary/src/UrbanDictionaryDataBank.php">
         <class name="UrbanDictionaryDataBank" namespace="Pyjac\UrbanDictionary">

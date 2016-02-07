@@ -34,9 +34,9 @@ final class UrbanWord
      */
     public function __construct($slang, $description, $sampleSentence)
     {
-        $this->slang = $slang;
-        $this->description = $description;
-        $this->sampleSentence = $sampleSentence;
+        $this->slang = (string)$slang;
+        $this->description = (string)$description;
+        $this->sampleSentence = (string)$sampleSentence;
     }
 
     /**
