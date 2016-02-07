@@ -287,4 +287,14 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addWord(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', ["slang" => "Goobe2", "description" => 'Trouble', 'sample‐sentence' => "I don't"]);
     }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testUrbanWordDictionaryThrowsInvalidArgumentExceptionWhenUpdateWordArgumentIsNotSupported()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', null);
+    }
 }
