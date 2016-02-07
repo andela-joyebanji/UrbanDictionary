@@ -106,16 +106,16 @@ class UrbanWordsDictionary
             if (!$this->validateUrbanWordArrayKeys($word)) {
                 throw new \InvalidArgumentException();
             }
-            $this->add($word['slang'], $word);
-        } elseif ($word instanceof UrbanWord) {
-            $this->add($word->getSlang(), $word->toArray());
-        } elseif ($this->validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)) {
-            $this->add($word, (new UrbanWord($word, $description, $someSentence))->toArray());
+            return $this->add($word['slang'], $word);
+        } 
+        if ($word instanceof UrbanWord) {
+            return $this->add($word->getSlang(), $word->toArray());
+        } 
+        if ($this->validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)) {
+            return $this->add($word, (new UrbanWord($word, $description, $someSentence))->toArray());
         } else {
             throw new \InvalidArgumentException();
         }
-
-        return true;
     }
 
     /**
