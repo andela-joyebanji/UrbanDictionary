@@ -129,8 +129,24 @@ class UrbanWordsDictionary
      */
     private function validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)
     {
-        return is_string($word) && is_string($description) && is_string($someSentence) &&
-                    !empty($word) && !empty($description)  && !empty($someSentence);
+        return array_reduce([$word, $description, $someSentence], function($initial, $current)
+        {
+            $initial = $this->is_non_empty_string($current);
+            return $initial;
+        },false);
+       
+    }
+
+    /**
+     * Validates $val is a non empty string.
+     *
+     * @param mixed $val
+     *
+     * @return true|false
+     */
+    function is_non_empty_string($val)
+    {
+        return is_string($val) && $val !== '';
     }
 
     /**
