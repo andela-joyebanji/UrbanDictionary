@@ -195,8 +195,8 @@ class UrbanWordsDictionary
      * @param string $word
      * @param array $wordUpdateArray
      *
-     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
-     *
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     * 
      * @return string 
      */
     private function updateWordArray($word, $wordUpdateArray)
@@ -204,15 +204,14 @@ class UrbanWordsDictionary
         foreach ($wordUpdateArray as $key => $value) {
            if(in_array($key, $this->urbanWordKeys)){
                 if(strcasecmp("slang", $key) == 0){
-                    //Replace Urban Word if the new object passed as a different slang
-                    if(strcasecmp($word, $value) !== 0){
-                        $this->urbanWords[$value] = $this->urbanWords[$wordUpdateArray];
-                        unset($this->urbanWords[$word]);
-                        //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
-                        $word = $value;
-                    }else {
-                        $this->urbanWords[$word][$key] = $value;
+                    if ($this->urbanWordExist($value)) {
+                        throw new UrbanWordAlreadyExistException();
                     }
+                    $this->urbanWords[$value] = $this->urbanWords[$word];
+                    $this->urbanWords[$value]["slang"] = $value;
+                    unset($this->urbanWords[$word]);
+                    //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
+                    $word = $value;
                 } else {
                     $this->urbanWords[$word][$key] = $value;
                 }

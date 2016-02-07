@@ -260,7 +260,6 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goob', 'Means Trouble', "I don't want any Goobo while doing my Cheakpoints ooo.");
     }
-
    
     public function testUrbanWordDictionaryUpdateWordCorrectlyWithAnArray()
     {
@@ -268,5 +267,24 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
         $urbanWordsDictionary->updateWord('Goobe', ["description" => 'Trouble', 'sample‐sentence' => "I don't"]);
         $this->assertEquals(["slang" => 'Goobe', "description" => 'Trouble', 'sample‐sentence' => "I don't"], $urbanWordsDictionary->getWord('Goobe'));
+    }
+
+    public function testUrbanWordDictionaryUpdateWordCorrectlyWithAnArrayWhenSlangChanges()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', ["slang" => "GoobeChanged", "description" => 'Trouble', 'sample‐sentence' => "I don't"]);
+        $this->assertEquals(["slang" => 'GoobeChanged', "description" => 'Trouble', 'sample‐sentence' => "I don't"], $urbanWordsDictionary->getWord('GoobeChanged'));
+    }
+
+    /**
+     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     */
+    public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhenUpdatingFromArrayWhoSlangValueAlreadyExist()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobo while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->updateWord('Goobe', ["slang" => "Goobe2", "description" => 'Trouble', 'sample‐sentence' => "I don't"]);
     }
 }
