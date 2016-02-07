@@ -31,12 +31,19 @@ final class UrbanWord
      * @param string $slang
      * @param string $description
      * @param string $sampleSentence
+     *
+     * @throws InvalidArgumentException
      */
     public function __construct($slang, $description, $sampleSentence)
     {
-        $this->slang = (string)$slang;
-        $this->description = (string)$description;
-        $this->sampleSentence = (string)$sampleSentence;
+        if(is_string($slang) && is_string($description) && is_string($sampleSentence)){
+            $this->slang = $slang;
+            $this->description = $description;
+            $this->sampleSentence = $sampleSentence;
+        }else {
+            throw new InvalidArgumentException;
+        }
+        
     }
 
     /**
