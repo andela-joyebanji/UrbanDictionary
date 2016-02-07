@@ -152,7 +152,7 @@ class UrbanWordsDictionary
      * Update the UrbanWord with an UrbanWord Object.
      *
      * @param string $word
-     * @param string $wordUpdateObject
+     * @param Pyjac\UrbanDictionary\UrbanWord $wordUpdateObject
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      *
@@ -176,7 +176,7 @@ class UrbanWordsDictionary
      * Update the UrbanWord with an Array.
      *
      * @param string $word
-     * @param string $wordUpdateObject
+     * @param array $wordUpdateArray
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      *
@@ -207,7 +207,7 @@ class UrbanWordsDictionary
      * Update an existing word, including it description and simple sentence, in the Urban Words
      * Dictionary.
      *
-     * @param string|array|UrbanWord $wordUpdate
+     * @param string|array|Pyjac\UrbanDictionary\UrbanWord $wordUpdate
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      * @throws InvalidArgumentException
