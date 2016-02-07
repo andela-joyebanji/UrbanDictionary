@@ -42,10 +42,15 @@ class UrbanWordsDictionary
      * @param string $word
      * @param array  $wordInfomation
      *
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     * 
      * @return true
      */
     private function add($word, $wordInfomation)
     {
+        if ($this->urbanWordExist($word)) {
+            throw new UrbanWordAlreadyExistException();
+        }
         $this->urbanWords[$word] = $wordInfomation;
         $this->count++;
 
@@ -102,16 +107,13 @@ class UrbanWordsDictionary
             if(!$this->validateUrbanWordArrayKeys($word)){
                 throw new \InvalidArgumentException();
             }
-            $this->add($word["slang"], $word)
+            $this->add($word["slang"], $word);
         } elseif ($word instanceof UrbanWord) {
             $this->add($word->getSlang(), $word->toArray());
         } elseif ($this->validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)) {
             $this->add($word, (new UrbanWord($word, $description, $someSentence))->toArray());
         } else {
             throw new \InvalidArgumentException();
-        }
-        if ($this->urbanWordExist($urbanWord)) {
-            throw new UrbanWordAlreadyExistException();
         }
 
         return true;
