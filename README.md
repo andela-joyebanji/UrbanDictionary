@@ -22,34 +22,44 @@ $ composer require Pyjac/UrbanDictionary
 
 A class used to store Detials of an Urban Word.
 ```php
-    $urbanWord = new Pyjac\UrbanDictionary\UrbanWord("Twale","An exclamation that is used to show
-respect to another person", "Twale!!! The Chairman");
+    $urbanWord = new Pyjac\UrbanDictionary\UrbanWord("Twale","An exclamation that is used to show respect to another person", "Twale!!! The Chairman");
 
 	$urbanWord->getSlang(); // "Twale"
-	$urbanWord->getDescription(); // "An exclamation that is used to show
-respect to another person"
+	$urbanWord->getDescription(); // "An exclamation that is used to show respect to another person"
 	$urbanWord->getSampleSentence(); // "Twale!!! The Chairman"
-	
-
-	$urbanWord->setSlang(); // "Twale"
-
+	$urbanWord->toArray(); 
+	// [
+	//	'slang'           => "Twale",
+	//	'description'     => "An exclamation that is used to show respect to another person.",
+	//	'sample-sentence' => "Twale!!! The Chairman."
+	//	]
 ```
 
-
-#####Create New Word
+###UrbanDictionaryDataBank
+A class that contains a static array of test Urban words.
 ```php
-    $urbanDictionary = new Pyjac\UrbanDictionary();
+	print_r(Pyjac\UrbanDictionary\UrbanDictionaryDataBank::$data);
+```
+###UrbanWordsDictionary
+A class used to store and manage urban words.
+```php
+	use Pyjac\UrbanDictionary\UrbanWordsDictionary;
+	use Pyjac\UrbanDictionary\UrbanWord;
 
-    //To create new urban word, pass  
-    //slang, description and sentence-example respectively
-    //to create function the function
+	$urbanWordsDictionary = new UrbanWordsDictionary();
+```
 
-    $urban->create
-    (
-      "Kpom-Kpi",
-      "Means to chill, cool-down, mellow",
-      "Bros, please can you Kpom-Kpi right there"
-    );
+#####Adding a new Urban Word
+```php
+	//Using UrbanWord Object
+    $urbanDictionary->addUrbanWordObject(new UrbanWord("Twale", "An exclamation that is used to show respect to another person", "Twale!!! The Chairman."));
+
+    //Using UrbanWord Array
+    $urbanWordArray = ['slang' => "Twale", 'description' => "An exclamation that is used to show respect to another person", 'sample‐sentence' => "Twale!!! The Chairman."];
+    $urbanWordsDictionary->addUrbanWordArray($urbanWordArray);
+
+    //Using Strings
+    $urbanWordsDictionary->addWord("Twale","An exclamation that is used to show respect to another person","Twale!!! The Chairman.");
 
 ```
 
