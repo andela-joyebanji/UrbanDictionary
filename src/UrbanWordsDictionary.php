@@ -107,8 +107,7 @@ class UrbanWordsDictionary
         } elseif ($word instanceof UrbanWord) {
             $urbanWord = $word->getSlang();
             $wordInfomation = $word->toArray();
-        } elseif (is_string($word) && is_string($description) && is_string($someSentence) &&
-                    !empty($word) && !empty($description)  && !empty($someSentence)) {
+        } elseif ($this->validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)) {
             $urbanWord = $word;
             $wordInfomation = (new UrbanWord($word, $description, $someSentence))->toArray();
         } else {
@@ -121,6 +120,23 @@ class UrbanWordsDictionary
 
         return $this->add($urbanWord, $wordInfomation);
     }
+
+    /**
+     * Validates the details of a word as a non-empty string.
+     *
+     * @param mixed $word
+     * @param mixed $description
+     * @param mixed $someSentence
+     *
+     * @return true|false
+     */
+    private function validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)
+    {
+        return (is_string($word) && is_string($description) && is_string($someSentence) &&
+                    !empty($word) && !empty($description)  && !empty($someSentence));
+    }
+    
+    
 
     /**
      * Update the slang of the UrbanWord in the Dictionary.
