@@ -145,7 +145,7 @@ class UrbanWordsDictionary
      * @param string $wordUpdate
      *
      * @throws InvalidArgumentException
-     *
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
      * @return string 
      */
     private function updateWordSlang($word, $wordUpdate)

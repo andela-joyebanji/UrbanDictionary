@@ -225,6 +225,19 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+    * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+    */
+    public function testUrbanWordDictionaryThrowsUrbanWordAlreadyExistExceptionWhenUpdateWordAlreadyExist()
+    {
+        $urbanWordsDictionary = new UrbanWordsDictionary();
+
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe', 'Used as a substitute for Trouble', "I don't want any Goobe while doing my Cheakpoints ooo."));
+        $urbanWordsDictionary->addWord(new UrbanWord('Goobe2', 'Used as a substitute for Trouble', "I don't want any Goobe2 while doing my Cheakpoints ooo."));
+        
+        $urbanWordsDictionary->updateWord('Goobe', "Goobe2");
+    }
+
+    /**
     * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
     */
     public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenTryingToGetChangedWord()
