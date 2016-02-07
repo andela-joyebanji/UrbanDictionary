@@ -28,9 +28,9 @@ final class UrbanWord
     /**
      * Create a new Urban Word.
      *
-     * @param string $slang
-     * @param string $description
-     * @param string $sampleSentence
+     * @param mixed $slang
+     * @param mixed $description
+     * @param mixed $sampleSentence
      *
      * @throws InvalidArgumentException
      */
