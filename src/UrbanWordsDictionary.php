@@ -107,8 +107,8 @@ class UrbanWordsDictionary
         } elseif ($word instanceof UrbanWord) {
             $urbanWord = $word->getSlang();
             $wordInfomation = $word->toArray();
-        } elseif (is_string($slang) && is_string($description) && is_string($sampleSentence) &&
-                    !empty($slang) && !empty($description)  && !empty($someSentence)) {
+        } elseif (is_string($word) && is_string($description) && is_string($someSentence) &&
+                    !empty($word) && !empty($description)  && !empty($someSentence)) {
             $urbanWord = $word;
             $wordInfomation = (new UrbanWord($word, $description, $someSentence))->toArray();
         } else {
