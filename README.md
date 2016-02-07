@@ -62,6 +62,27 @@ A class used to store and manage urban words.
     $urbanWordsDictionary->addWord("Twale","An exclamation that is used to show respect to another person","Twale!!! The Chairman.");
 
 ```
+#####Getting Urban Word
+```php
+	//Returns an associative array of the Urban Word
+	$urbanWordsDictionary->getWord("Twale");
+```
+#####Deleting Urban Word
+```php
+	$urbanWordsDictionary->deleteWord(Twale");
+```
+
+#####Updating Urban Word
+```php
+	//Using UrbanWord Object
+	$urbanWordsDictionary->updateWordObject('Twale', new UrbanWord("Twale", "Used to show respect to another person", "Twale!!! Mr Chairman sir."));
+
+	//Using UpdateWord Array
+	$urbanWordsDictionary->updateWordArray('Twale', ["description" => "Used to show respect to another person", 'sample‐sentence' => "Twale!!! Mr Chairman sir."]);
+
+	//Changing/Replacing the Slang
+	 $urbanWordsDictionary->updateWord("Twale", "Twa");
+```
 
 
 ## Security
