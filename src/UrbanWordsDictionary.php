@@ -155,14 +155,14 @@ class UrbanWordsDictionary
      * @param string $word
      * @param Pyjac\UrbanDictionary\UrbanWord $wordUpdateObject
      *
-     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
      *
      * @return string 
      */
     private function updateWordObject($word, $wordUpdateObject)
     {
         if ($this->urbanWordExist($wordUpdateObject->getSlang())) {
-            throw new UrbanWordDoesNotExistException();
+            throw new UrbanWordAlreadyExistException();
         }
         if(strcasecmp($word, $wordUpdateObject->getSlang()) !== 0){
             unset($this->urbanWords[$word]);
