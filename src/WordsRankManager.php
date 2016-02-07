@@ -54,24 +54,22 @@ class WordsRankManager
     private function computeWordsRank()
     {
         if ($this->getMode() == CASE_SENSITIVE) {
-            $this->wordsRank = 
+            $this->wordsRank =
                             array_count_values(
-                                preg_replace("/[^A-Za-z0-9 ]/", '', explode(' ', $this->sentence))
+                                preg_replace('/[^A-Za-z0-9 ]/', '', explode(' ', $this->sentence))
                             );
         } else {
             //Reference: http://us3.php.net/manual/en/function.array-count-values.php#81799
-            $this->wordsRank = 
+            $this->wordsRank =
                             array_count_values(
                                 preg_replace(
-                                    "/[^A-Za-z0-9 ]/", 
-                                    '', 
+                                    '/[^A-Za-z0-9 ]/',
+                                    '',
                                     array_map('strtolower', explode(' ', $this->sentence))
                                     )
                             );
         }
     }
-
-
 
     /**
      * Get the set sentence.
@@ -116,7 +114,7 @@ class WordsRankManager
     public function getWordRank($word)
     {
         if (!$this->wordExist($word)) {
-            throw new WordDoesNotExistException;
+            throw new WordDoesNotExistException();
         }
 
         return $this->wordsRank[$word];
