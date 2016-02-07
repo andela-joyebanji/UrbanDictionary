@@ -101,7 +101,6 @@ class UrbanWordsDictionary
      */
     public function addWord($word, $description = '', $someSentence = '')
     {
-        
         //Check if an associative array is passed to the function
         if (is_array($word) && !empty($word) && count($word) == 3) {
             if(!$this->validateUrbanWordArrayKeys($word)){
@@ -149,12 +148,7 @@ class UrbanWordsDictionary
     private function updateWordSlang($word, $wordUpdate)
     {
         if(!empty($wordUpdate)) {
-            if ($this->urbanWordExist($wordUpdate)) {
-                throw new UrbanWordAlreadyExistException();
-            }
-            $this->urbanWords[$wordUpdate] = $this->urbanWords[$word];
-            $this->urbanWords[$wordUpdate]["slang"] = $wordUpdate;
-            unset($this->urbanWords[$word]);
+            $this->replaceWordSlang($word, $wordUpdate);
             //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
             $word = $wordUpdate;
         } else {
@@ -188,6 +182,26 @@ class UrbanWordsDictionary
     }
 
     /**
+     * Replaces a UrbanWord Slang.
+     *
+     * @param string $word
+     * @param string  $slang
+     *
+     * @throws Pyjac\UrbanDictionary\Exception\UrbanWordAlreadyExistException
+     * 
+     * @return string 
+     */
+    private function replaceWordSlang($word, $slang)
+    {
+        if ($this->urbanWordExist($slang)) {
+            throw new UrbanWordAlreadyExistException();
+        }
+        $this->urbanWords[$slang] = $this->urbanWords[$word];
+        $this->urbanWords[$slang]["slang"] = $slang;
+        unset($this->urbanWords[$word]);
+    }
+
+    /**
      * Update the UrbanWord with an Array.
      *
      * @param string $word
@@ -202,12 +216,7 @@ class UrbanWordsDictionary
         foreach ($wordUpdateArray as $key => $value) {
            if(in_array($key, $this->urbanWordKeys)){
                 if(strcasecmp("slang", $key) == 0){
-                    if ($this->urbanWordExist($value)) {
-                        throw new UrbanWordAlreadyExistException();
-                    }
-                    $this->urbanWords[$value] = $this->urbanWords[$word];
-                    $this->urbanWords[$value]["slang"] = $value;
-                    unset($this->urbanWords[$word]);
+                    $this->replaceWordSlang($word, $value);
                     //Once the slang as been replaced, subsequent modifications should be done on the new slang value 
                     $word = $value;
                 } else {
