@@ -107,7 +107,8 @@ class UrbanWordsDictionary
         } elseif ($word instanceof UrbanWord) {
             $urbanWord = $word->getSlang();
             $wordInfomation = $word->toArray();
-        } elseif (!empty($word) && !empty($description)  && !empty($someSentence)) {
+        } elseif (is_string($slang) && is_string($description) && is_string($sampleSentence) &&
+                    !empty($slang) && !empty($description)  && !empty($someSentence)) {
             $urbanWord = $word;
             $wordInfomation = (new UrbanWord($word, $description, $someSentence))->toArray();
         } else {
@@ -273,8 +274,6 @@ class UrbanWordsDictionary
 
     /**
      * Get number of Words in Urban Words Dictionary.
-     *
-     * @param string $word
      *
      * @throws Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      *
