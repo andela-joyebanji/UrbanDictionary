@@ -109,9 +109,9 @@ final class UrbanWord
     public function equals($object)
     {
         return strcmp(get_class($object), 'Pyjac\UrbanDictionary\UrbanWord') == 0
-           and strcmp($this->slang, $object->slang) == 0
-           and strcmp($this->description, $object->description) == 0
-           and strcmp($this->sampleSentence, $object->sampleSentence) == 0;
+           && strcmp($this->slang, $object->slang) == 0
+           && strcmp($this->description, $object->description) == 0
+           && strcmp($this->sampleSentence, $object->sampleSentence) == 0;
     }
 
     /**
