@@ -41,7 +41,7 @@ final class UrbanWord
             $this->description = $description;
             $this->sampleSentence = $sampleSentence;
         }else {
-            throw new InvalidArgumentException;
+            throw new \InvalidArgumentException;
         }
         
     }

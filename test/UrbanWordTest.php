@@ -30,6 +30,36 @@ class UrbanWordTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($sampleSentence, $urbanword->getSampleSentence());
     }
 
+     /**
+     * @dataProvider inputUrbanWords
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testUrbanWordThrowInvalidArgumentExceptionWhenNonStringSlangIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanword = new UrbanWord([], $description, $sampleSentence);
+    }
+
+    /**
+     * @dataProvider inputUrbanWords
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testUrbanWordThrowInvalidArgumentExceptionWhenNonStringDescriptionIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanword = new UrbanWord($slang, null, $sampleSentence);
+    }
+
+    /**
+     * @dataProvider inputUrbanWords
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testUrbanWordThrowInvalidArgumentExceptionWhenNonStringSampleSentenceIsPassed($slang, $description, $sampleSentence)
+    {
+        $urbanword = new UrbanWord($slang, $description, null);
+    }
+
     /**
      * @dataProvider inputUrbanWords
      */
