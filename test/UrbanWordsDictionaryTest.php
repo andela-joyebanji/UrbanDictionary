@@ -163,9 +163,8 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
         //Duplicate
         $urbanWordsDictionary->addUrbanWordObject(new UrbanWord($slang, $description, $sampleSentence));
     }
-            
+
     /**
-     * 
      * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      */
     public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenUpdateWordDoesNotExistViaUrbanWordObject()
@@ -297,7 +296,6 @@ class UrbanWordsDictionaryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * 
      * @expectedException Pyjac\UrbanDictionary\Exception\UrbanWordDoesNotExistException
      */
     public function testUrbanWordDictionaryThrowsUrbanWordDoesNotExistExceptionWhenUpdateWordDoesNotExistViaUrbanWordArray()
