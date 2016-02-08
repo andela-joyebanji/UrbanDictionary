@@ -84,6 +84,33 @@ A class used to store and manage urban words.
 	 $urbanWordsDictionary->updateWord("Twale", "Twa");
 ```
 
+###WordsRankManager
+A class used to rank words in a string or sentence.
+It allows perform CASE_INSENSITIVE and CASE_SENSITIVE rank of words in a sentence.
+
+```php
+	use Pyjac\UrbanDictionary\WordsRankManager;
+
+	$sentence = 'Prosper has finished the curriculum and he will submit it to Nadayar. Tight Tight Tight';
+	//CASE_SENSITIVE by default
+    $wordsRankManager = new WordsRankManager($sentence);
+    $wordsRankManager->getWordRank('Tight'); // 3
+
+    // Throws Pyjac\UrbanDictionary\Exception\WordDoesNotExistException
+    $wordsRankManager->getWordRank('tight');  
+
+    $wordsRankManager->setMode(CASE_INSENSITIVE);
+    $wordsRankManager->getWordRank('tight'); // 3
+
+    $wordsRankManager = new WordsRankManager($sentence);
+
+    print_r($wordsRankManager->getWordsRank());
+    // ['Prosper'    => 1, 'has' => 1, 'finished' => 1, 'the'     => 1, 
+    //  'curriculum' => 1, 'and' => 1, 'he'       => 1, 'will'    => 1, 
+    //  'submit'     => 1, 'it'  => 1, 'to'       => 1, 'Nadayar' => 1, 
+    //  'Tight'      => 3]
+
+```
 
 ## Security
 
