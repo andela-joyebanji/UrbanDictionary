@@ -86,7 +86,7 @@ A class used to store and manage urban words.
 
 ###WordsRankManager
 A class used to rank words in a string or sentence.
-It allows perform CASE_INSENSITIVE and CASE_SENSITIVE rank of words in a sentence.
+It allows performing CASE_INSENSITIVE and CASE_SENSITIVE rank of words in a sentence.
 
 ```php
 	use Pyjac\UrbanDictionary\WordsRankManager;
