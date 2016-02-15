@@ -153,10 +153,9 @@ class UrbanWordsDictionary
     private function validateUrbanWordDetailsAreNonEmptyStrings($word, $description, $someSentence)
     {
         return array_reduce([$word, $description, $someSentence], function ($initial, $current) {
-            $initial = $this->is_non_empty_string($current);
-
-            return $initial;
-        }, false);
+            
+            return $this->is_non_empty_string($current) && $initial;
+        }, true);
     }
 
     /**
