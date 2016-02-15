@@ -6,7 +6,7 @@
 ###  Urban Dictionary Agnostic PHP Package
 
 A PHP package for managing Urban Words and ranking of words in a sentence.
-This Package uses [PSR-4 Autoload Standard](http://example.com/ "PSR-4").
+This Package uses [PSR-4 Autoload Standard](http://www.php-fig.org/psr/psr-4/ "PSR-4").
 
 
 ## Install
