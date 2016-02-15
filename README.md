@@ -5,8 +5,9 @@
 
 ###  Urban Dictionary Agnostic PHP Package
 
-A php package for managing Urban Words and ranking of words in a sentence.
-This Package uses PSR-4 Autoload Standard.
+A PHP package for managing Urban Words and ranking of words in a sentence.
+This Package uses [PSR-4 Autoload Standard](http://example.com/ "PSR-4").
+
 
 ## Install
 
@@ -20,7 +21,7 @@ $ composer require Pyjac/UrbanDictionary
 
 ###UrbanWord
 
-A class used to store Detials of an Urban Word.
+A class used to store Details of an Urban Word.
 ```php
     $urbanWord = new Pyjac\UrbanDictionary\UrbanWord("Twale","An exclamation that is used to show respect to another person", "Twale!!! The Chairman");
 
