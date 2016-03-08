@@ -12,15 +12,15 @@
     ],
     "require":
     {
-        "php" : ">=5.5.9"
+        "php" : ">=5.6"
     },
 	"require-dev": {
         "phpunit/phpunit": "5.1.*"
     },
 	"autoload": {
 		"psr-4": {
-			"Pyjac\\UrbanDictionary\\" : "src/"
-			//"Pyjac\\UrbanDictionary\\Exception\\" : "src/exception"
+			"Pyjac\\UrbanDictionary\\" : "src",
+			"Pyjac\\UrbanDictionary\\Exception\\" : "src/exception"
 
 		}
 	}

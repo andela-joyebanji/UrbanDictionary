@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1455554135">
+  <project timestamp="1455554135">
+    <package name="Pyjac\UrbanDictionary">
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/UrbanDictionaryDataBank.php">
+        <class name="UrbanDictionaryDataBank" namespace="Pyjac\UrbanDictionary">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="30" ncloc="25" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/UrbanWord.php">
+        <class name="UrbanWord" namespace="Pyjac\UrbanDictionary">
+          <metrics methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="33" coveredelements="33"/>
+        </class>
+        <line num="37" type="method" name="__construct" crap="4" count="43"/>
+        <line num="39" type="stmt" count="43"/>
+        <line num="40" type="stmt" count="37"/>
+        <line num="41" type="stmt" count="37"/>
+        <line num="42" type="stmt" count="37"/>
+        <line num="43" type="stmt" count="37"/>
+        <line num="44" type="stmt" count="6"/>
+        <line num="46" type="stmt" count="37"/>
+        <line num="53" type="method" name="getSlang" crap="1" count="24"/>
+        <line num="55" type="stmt" count="24"/>
+        <line num="63" type="method" name="setSlang" crap="1" count="2"/>
+        <line num="65" type="stmt" count="2"/>
+        <line num="66" type="stmt" count="2"/>
+        <line num="73" type="method" name="getDescription" crap="1" count="2"/>
+        <line num="75" type="stmt" count="2"/>
+        <line num="83" type="method" name="setDescription" crap="1" count="2"/>
+        <line num="85" type="stmt" count="2"/>
+        <line num="86" type="stmt" count="2"/>
+        <line num="93" type="method" name="getSampleSentence" crap="1" count="2"/>
+        <line num="95" type="stmt" count="2"/>
+        <line num="103" type="method" name="setSampleSentence" crap="1" count="2"/>
+        <line num="105" type="stmt" count="2"/>
+        <line num="106" type="stmt" count="2"/>
+        <line num="115" type="method" name="equals" crap="4" count="2"/>
+        <line num="117" type="stmt" count="2"/>
+        <line num="118" type="stmt" count="2"/>
+        <line num="119" type="stmt" count="2"/>
+        <line num="120" type="stmt" count="2"/>
+        <line num="128" type="method" name="toArray" crap="1" count="32"/>
+        <line num="130" type="stmt" count="32"/>
+        <line num="131" type="stmt" count="32"/>
+        <line num="132" type="stmt" count="32"/>
+        <line num="134" type="stmt" count="32"/>
+        <metrics loc="136" ncloc="70" classes="1" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="33" coveredelements="33"/>
+      </file>
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/UrbanWordsDictionary.php">
+        <class name="UrbanWordsDictionary" namespace="Pyjac\UrbanDictionary">
+          <metrics methods="17" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="69" elements="86" coveredelements="86"/>
+        </class>
+        <line num="31" type="method" name="__construct" crap="1" count="51"/>
+        <line num="33" type="stmt" count="51"/>
+        <line num="34" type="stmt" count="51"/>
+        <line num="35" type="stmt" count="51"/>
+        <line num="48" type="method" name="add" crap="2" count="31"/>
+        <line num="50" type="stmt" count="31"/>
+        <line num="51" type="stmt" count="6"/>
+        <line num="53" type="stmt" count="31"/>
+        <line num="54" type="stmt" count="31"/>
+        <line num="56" type="stmt" count="31"/>
+        <line num="66" type="method" name="urbanWordExist" crap="1" count="32"/>
+        <line num="68" type="stmt" count="32"/>
+        <line num="78" type="method" name="validateUrbanWordArrayKeys" crap="3" count="9"/>
+        <line num="80" type="stmt" count="9"/>
+        <line num="81" type="stmt" count="9"/>
+        <line num="82" type="stmt" count="6"/>
+        <line num="84" type="stmt" count="3"/>
+        <line num="86" type="stmt" count="3"/>
+        <line num="102" type="method" name="addWord" crap="2" count="19"/>
+        <line num="104" type="stmt" count="19"/>
+        <line num="105" type="stmt" count="7"/>
+        <line num="107" type="stmt" count="12"/>
+        <line num="120" type="method" name="addUrbanWordObject" crap="1" count="21"/>
+        <line num="122" type="stmt" count="21"/>
+        <line num="135" type="method" name="addUrbanWordArray" crap="2" count="9"/>
+        <line num="137" type="stmt" count="9"/>
+        <line num="138" type="stmt" count="6"/>
+        <line num="141" type="stmt" count="3"/>
+        <line num="155" type="method" name="anonymous function" crap="2" count="19"/>
+        <line num="157" type="stmt" count="19"/>
+        <line num="158" type="stmt" count="19"/>
+        <line num="168" type="method" name="is_non_empty_string" crap="2" count="28"/>
+        <line num="170" type="stmt" count="28"/>
+        <line num="183" type="method" name="updateWordObject" crap="4" count="3"/>
+        <line num="185" type="stmt" count="3"/>
+        <line num="186" type="stmt" count="1"/>
+        <line num="188" type="stmt" count="2"/>
+        <line num="189" type="stmt" count="1"/>
+        <line num="191" type="stmt" count="1"/>
+        <line num="192" type="stmt" count="1"/>
+        <line num="193" type="stmt" count="1"/>
+        <line num="194" type="stmt" count="1"/>
+        <line num="195" type="stmt" count="1"/>
+        <line num="197" type="stmt" count="1"/>
+        <line num="210" type="method" name="replaceWordSlang" crap="2" count="5"/>
+        <line num="212" type="stmt" count="5"/>
+        <line num="213" type="stmt" count="2"/>
+        <line num="215" type="stmt" count="3"/>
+        <line num="216" type="stmt" count="3"/>
+        <line num="217" type="stmt" count="3"/>
+        <line num="218" type="stmt" count="3"/>
+        <line num="230" type="method" name="updateWordArray" crap="5" count="4"/>
+        <line num="232" type="stmt" count="4"/>
+        <line num="233" type="stmt" count="1"/>
+        <line num="235" type="stmt" count="3"/>
+        <line num="236" type="stmt" count="3"/>
+        <line num="237" type="stmt" count="3"/>
+        <line num="238" type="stmt" count="2"/>
+        <line num="240" type="stmt" count="1"/>
+        <line num="241" type="stmt" count="1"/>
+        <line num="242" type="stmt" count="2"/>
+        <line num="244" type="stmt" count="2"/>
+        <line num="245" type="stmt" count="2"/>
+        <line num="247" type="stmt" count="2"/>
+        <line num="261" type="method" name="updateWord" crap="4" count="9"/>
+        <line num="263" type="stmt" count="9"/>
+        <line num="264" type="stmt" count="7"/>
+        <line num="265" type="stmt" count="4"/>
+        <line num="267" type="stmt" count="3"/>
+        <line num="269" type="stmt" count="2"/>
+        <line num="270" type="stmt" count="2"/>
+        <line num="271" type="stmt" count="2"/>
+        <line num="274" type="stmt" count="2"/>
+        <line num="286" type="method" name="getWord" crap="2" count="13"/>
+        <line num="288" type="stmt" count="13"/>
+        <line num="289" type="stmt" count="2"/>
+        <line num="292" type="stmt" count="11"/>
+        <line num="304" type="method" name="deleteWord" crap="2" count="2"/>
+        <line num="306" type="stmt" count="2"/>
+        <line num="307" type="stmt" count="1"/>
+        <line num="310" type="stmt" count="1"/>
+        <line num="312" type="stmt" count="1"/>
+        <line num="322" type="method" name="getCount" crap="1" count="1"/>
+        <line num="324" type="stmt" count="1"/>
+        <line num="332" type="method" name="isEmpty" crap="1" count="5"/>
+        <line num="334" type="stmt" count="5"/>
+        <metrics loc="336" ncloc="173" classes="1" methods="17" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="69" elements="86" coveredelements="86"/>
+      </file>
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/WordsRankManager.php">
+        <class name="WordsRankManager" namespace="Pyjac\UrbanDictionary">
+          <metrics methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="43" coveredelements="43"/>
+        </class>
+        <line num="7" type="stmt" count="1"/>
+        <line num="8" type="stmt" count="1"/>
+        <line num="38" type="method" name="__construct" crap="3" count="7"/>
+        <line num="40" type="stmt" count="7"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="44" type="stmt" count="7"/>
+        <line num="45" type="stmt" count="7"/>
+        <line num="46" type="stmt" count="7"/>
+        <line num="47" type="stmt" count="7"/>
+        <line num="54" type="method" name="computeWordsRank" crap="2" count="7"/>
+        <line num="56" type="stmt" count="7"/>
+        <line num="57" type="stmt" count="7"/>
+        <line num="58" type="stmt" count="7"/>
+        <line num="59" type="stmt" count="7"/>
+        <line num="60" type="stmt" count="7"/>
+        <line num="61" type="stmt" count="7"/>
+        <line num="63" type="stmt" count="3"/>
+        <line num="64" type="stmt" count="3"/>
+        <line num="65" type="stmt" count="3"/>
+        <line num="66" type="stmt" count="3"/>
+        <line num="67" type="stmt" count="3"/>
+        <line num="68" type="stmt" count="3"/>
+        <line num="69" type="stmt" count="3"/>
+        <line num="70" type="stmt" count="3"/>
+        <line num="72" type="stmt" count="7"/>
+        <line num="79" type="method" name="getSentence" crap="1" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="89" type="method" name="setMode" crap="2" count="1"/>
+        <line num="91" type="stmt" count="1"/>
+        <line num="92" type="stmt" count="1"/>
+        <line num="93" type="stmt" count="1"/>
+        <line num="94" type="stmt" count="1"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="102" type="method" name="getMode" crap="1" count="7"/>
+        <line num="104" type="stmt" count="7"/>
+        <line num="114" type="method" name="getWordRank" crap="2" count="4"/>
+        <line num="116" type="stmt" count="4"/>
+        <line num="117" type="stmt" count="1"/>
+        <line num="120" type="stmt" count="3"/>
+        <line num="128" type="method" name="getWordsRank" crap="1" count="1"/>
+        <line num="130" type="stmt" count="1"/>
+        <line num="138" type="method" name="wordExist" crap="3" count="4"/>
+        <line num="140" type="stmt" count="4"/>
+        <line num="141" type="stmt" count="2"/>
+        <line num="143" type="stmt" count="3"/>
+        <metrics loc="146" ncloc="87" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="45" coveredelements="45"/>
+      </file>
+    </package>
+    <package name="Pyjac\UrbanDictionary\Exception">
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/exception/UrbanWordAlreadyExistException.php">
+        <class name="UrbanWordAlreadyExistException" namespace="Pyjac\UrbanDictionary\Exception">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="7" type="method" name="__construct" crap="1" count="9"/>
+        <line num="9" type="stmt" count="9"/>
+        <line num="10" type="stmt" count="9"/>
+        <metrics loc="11" ncloc="11" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/exception/UrbanWordDoesNotExistException.php">
+        <class name="UrbanWordDoesNotExistException" namespace="Pyjac\UrbanDictionary\Exception">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="7" type="method" name="__construct" crap="1" count="9"/>
+        <line num="9" type="stmt" count="9"/>
+        <line num="10" type="stmt" count="9"/>
+        <metrics loc="11" ncloc="11" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+      <file name="/Users/bendozy/Desktop/UrbanDictionary/src/exception/WordDoesNotExistException.php">
+        <class name="WordDoesNotExistException" namespace="Pyjac\UrbanDictionary\Exception">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="7" type="method" name="__construct" crap="1" count="1"/>
+        <line num="9" type="stmt" count="1"/>
+        <line num="10" type="stmt" count="1"/>
+        <metrics loc="11" ncloc="11" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+    </package>
+    <metrics files="7" loc="681" ncloc="388" classes="7" methods="37" coveredmethods="37" conditionals="0" coveredconditionals="0" statements="136" coveredstatements="136" elements="173" coveredelements="173"/>
+  </project>
+</coverage>
